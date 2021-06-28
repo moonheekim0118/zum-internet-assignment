@@ -1,6 +1,12 @@
 import express from "express";
-import { Category } from "../types";
 import { bestData, contentsData } from "../data";
+
+enum Category {
+  life = "life",
+  culture = "culture",
+  food = "food",
+  travel = "travel",
+}
 
 export const best = async (req: express.Request, res: express.Response) => {
   try {
