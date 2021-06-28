@@ -1,5 +1,6 @@
 import express from "express";
 import { bestData, contentsData } from "../data";
+import { INIT_CONTENTS, INFINITE_CONTENTS } from "../constant";
 
 enum Category {
   life = "life",
@@ -20,7 +21,7 @@ export const best = async (req: express.Request, res: express.Response) => {
 export const contents = async (req: express.Request, res: express.Response) => {
   try {
     const category = req.params.category as Category;
-    const contents = contentsData[category].slice(0, 4);
+    const contents = contentsData[category].slice(0, INIT_CONTENTS);
     res.status(200).json({ data: contents });
   } catch (error) {
     console.error(error);
@@ -39,8 +40,8 @@ export const contentsDetail = async (
     const contents = contentsData[category];
     const index = contents.findIndex((content) => content.idx === lastKey);
 
-    const parsedData = contents.slice(index + 1, index + 13);
-    const hasMore = parsedData.length === 12;
+    const parsedData = contents.slice(index + 1, index + INFINITE_CONTENTS + 1);
+    const hasMore = parsedData.length === INFINITE_CONTENTS;
     res.status(200).json({ data: parsedData, hasMore });
   } catch (error) {
     console.error(error);
