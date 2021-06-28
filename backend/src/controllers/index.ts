@@ -11,9 +11,12 @@ enum Category {
 
 export const best = async (req: express.Request, res: express.Response) => {
   try {
-    res.status(200).json({ data: bestData });
+    return res.status(200).json({ data: bestData });
   } catch (error) {
-    console.error(error);
+    console.error(error.stack);
+    return res
+      .status(500)
+      .send({ status: 500, message: error.message ?? "internal Error" });
   }
 };
 
@@ -22,9 +25,13 @@ export const contents = async (req: express.Request, res: express.Response) => {
   try {
     const category = req.params.category as Category;
     const contents = contentsData[category].slice(0, INIT_CONTENTS);
-    res.status(200).json({ data: contents });
+    if (!contents) throw new Error("Not Found Category");
+    return res.status(200).json({ data: contents });
   } catch (error) {
-    console.error(error);
+    console.error(error.stack);
+    return res
+      .status(500)
+      .send({ status: 500, message: error.message ?? "internal Error" });
   }
 };
 
@@ -38,12 +45,16 @@ export const contentsDetail = async (
     const lastKey = +req.params.idx;
 
     const contents = contentsData[category];
+    if (!contents) throw new Error("Not Found Category");
     const index = contents.findIndex((content) => content.idx === lastKey);
 
     const parsedData = contents.slice(index + 1, index + INFINITE_CONTENTS + 1);
     const hasMore = parsedData.length === INFINITE_CONTENTS;
-    res.status(200).json({ data: parsedData, hasMore });
+    return res.status(200).json({ data: parsedData, hasMore });
   } catch (error) {
-    console.error(error);
+    console.error(error.stack);
+    return res
+      .status(500)
+      .send({ status: 500, message: error.message ?? "internal Error" });
   }
 };

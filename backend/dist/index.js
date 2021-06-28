@@ -9,7 +9,7 @@ var app = express_1.default();
 var port = 3000;
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
-app.use('/api', routes_1.default);
+app.use("/api", routes_1.default);
 app.listen(port, function () {
     console.log("서버 구동중");
 });
