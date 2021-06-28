@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsc && node dist/index.js",
-    "prepare": "cd ../ && husky install ./backend/.husky",
-    "pre-commit": "lint-staged"
+    "prepare": "cd ../ && husky install ./backend/.husky"
   },
   "author": "Moonhee kim",
   "license": "ISC",
