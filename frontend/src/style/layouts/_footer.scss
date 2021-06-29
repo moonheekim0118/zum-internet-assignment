@@ -1,0 +1,11 @@
+footer {
+  display: grid;
+  place-items: center;
+  border-top: 1px solid var(--color-light-gray);
+  padding: var(--space-lg);
+
+  span {
+    font-size: var(--text-sm);
+    color: var(--color-dark-gray);
+  }
+}
