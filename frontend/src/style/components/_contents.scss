@@ -11,6 +11,7 @@
     flex-direction: column;
     justify-content: center;
     padding: var(--space-lg) 0;
+    border-bottom: 1px solid var(--color-light-gray);
 
     h4 {
       color: var(--color-dark-gray);
@@ -23,7 +24,6 @@
       justify-content: center;
       grid-template-columns: repeat(auto-fit, 300px);
       gap: var(--space-md);
-      border-bottom: 1px solid var(--color-light-gray);
     }
   }
 }
