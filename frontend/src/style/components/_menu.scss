@@ -1,0 +1,23 @@
+.menu-container {
+  display: flex;
+  justify-content: space-around;
+
+  li {
+    margin-right: var(--space-md);
+    padding: var(--space-sm);
+
+    &:not(.visiting):hover a {
+      color: var(--color-dark-blue);
+      font-weight: bold;
+    }
+  }
+
+  .visiting {
+    background-color: var(--color-dark-blue);
+    a {
+      background-color: inherit;
+      color: var(--color-white);
+      font-weight: bold;
+    }
+  }
+}
