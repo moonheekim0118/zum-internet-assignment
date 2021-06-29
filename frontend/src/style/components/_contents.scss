@@ -17,13 +17,13 @@
       color: var(--color-dark-gray);
       margin-left: var(--space-xxl);
     }
-
-    .contents-list {
-      width: 100%;
-      display: grid;
-      justify-content: center;
-      grid-template-columns: repeat(auto-fit, 300px);
-      gap: var(--space-md);
-    }
   }
+}
+
+.contents-list {
+  width: 100%;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, 300px);
+  gap: var(--space-md);
 }
