@@ -1,0 +1,29 @@
+nav {
+  border-top: 1px solid var(--color-light-gray);
+  width: 100%;
+  padding: var(--space-xs) var(--space-md);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  ul {
+    display: flex;
+    justify-content: space-around;
+
+    li {
+      margin-left: var(--space-md);
+
+      &:not(.visiting):hover a {
+        color: var(--color-dark-blue);
+        font-weight: bold;
+      }
+    }
+    .visiting a {
+      background-color: var(--color-dark-blue);
+      color: var(--color-white);
+      font-weight: bold;
+      border-top: 1px solid var(--color-dark-blue);
+      padding: var(--space-sm);
+    }
+  }
+}

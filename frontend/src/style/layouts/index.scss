@@ -1,0 +1,10 @@
+@use "header";
+@use "main";
+@use "footer";
+@use "navigator";
+
+.layout {
+  display: grid;
+  height: 100%;
+  grid-template-rows: auto 1fr auto;
+}
