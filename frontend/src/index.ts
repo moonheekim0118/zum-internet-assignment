@@ -1,3 +1,8 @@
 import "@/style";
+import App from "./App";
 
-console.log("hello");
+const render = () => {
+  new App();
+};
+
+window.addEventListener("DOMContentLoaded", render);
