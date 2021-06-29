@@ -55,6 +55,18 @@
           }
         }
       }
+
+      &:hover {
+        background-color: var(--color-dark-blue);
+
+        .detail,
+        strong,
+        span,
+        .number_rank_top,
+        .number_rank {
+          color: var(--color-white);
+        }
+      }
     }
   }
 }
