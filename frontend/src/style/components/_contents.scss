@@ -7,9 +7,23 @@
 
   .contents-detail {
     width: 100%;
-    display: grid;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    grid-template-columns: repeat(auto-fit, 300px);
-    gap: var(--space-md);
+    padding: var(--space-lg) 0;
+
+    h4 {
+      color: var(--color-dark-gray);
+      margin-left: var(--space-xxl);
+    }
+
+    .contents-list {
+      width: 100%;
+      display: grid;
+      justify-content: center;
+      grid-template-columns: repeat(auto-fit, 300px);
+      gap: var(--space-md);
+      border-bottom: 1px solid var(--color-light-gray);
+    }
   }
 }
