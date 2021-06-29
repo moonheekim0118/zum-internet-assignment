@@ -35,8 +35,26 @@ export const contents = async (req: express.Request, res: express.Response) => {
   }
 };
 
+// 상세 포스트
+
+export const contentsDetail = async(req: express.Request,
+  res: express.Response)=>{
+    try{
+      const { category , index} = req.params;
+      const contents = contentsData[category as Category].find((content)=>content.idx===+index);
+      if(!contents) throw new Error("Not Found data");
+      return res.status(200).json({ data: contents });
+    }catch(error){
+      console.error(error.stack);
+      return res
+        .status(500)
+        .send({ status: 500, message: error.message ?? "internal Error" });
+    }
+
+}
+
 // 해당 카테고리 무한 스크롤
-export const contentsDetail = async (
+export const contentsInfinite = async (
   req: express.Request,
   res: express.Response
 ) => {
