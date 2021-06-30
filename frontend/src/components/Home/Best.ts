@@ -1,6 +1,7 @@
 import { Component } from "@/core";
 import { newElement } from "@/utils/dom";
 import { ApiStatus, IBest } from "@/types";
+import { Loader, Error } from "@/components/Shared";
 import { bestStore } from "@/stores";
 import { BEST_REQUEST } from "@/actions/best";
 
@@ -21,7 +22,7 @@ class Best extends Component {
     const { data, status } = this.useSelector();
 
     const renderByStatus = {
-      [ApiStatus.LOADING]: () => `<h3>데이터를 가져오는 중..</h3>`,
+      [ApiStatus.LOADING]: () => Loader(),
       [ApiStatus.DONE]: (data: IBest[]) => ` 
       <ul>
       ${data
@@ -42,7 +43,7 @@ class Best extends Component {
         })
         .join("")}
         </ul>`,
-      [ApiStatus.FAIL]: () => `<h3>에러가 생겼네용</h3>`,
+      [ApiStatus.FAIL]: () => Error(),
     };
     this.$container.innerHTML = renderByStatus[status](data);
   }

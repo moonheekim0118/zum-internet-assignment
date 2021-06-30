@@ -1,6 +1,6 @@
 import { Component } from "@/core";
 import { newElement } from "@/utils/dom";
-import { CardList } from "@/components/Shared";
+import { CardList, Loader, Error } from "@/components/Shared";
 import { IHubContents, ApiStatus } from "@/types";
 import { CONTENTS_REQUEST } from "@/actions/contents";
 import { contentsStore } from "@/stores";
@@ -25,7 +25,7 @@ class ContentsList extends Component {
 
     console.log(data);
     const renderByStatus = {
-      [ApiStatus.LOADING]: () => `<h3>잠시만 기다려주세요</h3>`,
+      [ApiStatus.LOADING]: () => Loader(),
       [ApiStatus.DONE]: (data: IHubContents) => `
       <div class="contents-detail" data-id="culture">
       <h4>#컬쳐</h4>
@@ -44,7 +44,7 @@ class ContentsList extends Component {
         ${CardList({ contentsList: data.travel })}
       </div>
       `,
-      [ApiStatus.FAIL]: () => `<h3>서버에 문제가 생겼어요!</h3>`,
+      [ApiStatus.FAIL]: () => Error(),
     };
     this.$container.innerHTML = renderByStatus[status](data);
   }
