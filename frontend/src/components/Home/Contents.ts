@@ -8,6 +8,8 @@ interface IState {
   data: IHubContents | null;
 }
 
+// TODO : 렌더링 map으로 리팩토링하기
+
 class ContentsList extends Component<{}, IState> {
   constructor() {
     super();
