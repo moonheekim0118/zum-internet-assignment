@@ -27,6 +27,7 @@ class Category extends Component<{}, IState> {
   protected componentWillMount(): void {
     const category = router.pathanme().replace("/", "") as CategoryType;
     this.state = { category };
+    this.handleGetMoreData();
     new IntersectionObserver(
       { $root: this.$container, rootMargin: "0px", threshold: 1.0 },
       this.$observer,

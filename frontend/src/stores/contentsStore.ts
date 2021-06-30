@@ -24,7 +24,8 @@ const initialState = {
 class ContentsStore extends Store<IState> {
   protected reducer = {
     [actions.GET_REQUEST]: ({ data }) => {
-      const { hasMore, status } = this.state;
+      const { hasMore, status, category } = this.state;
+      if (category !== data) this.setState(initialState);
       if (!hasMore || status === ApiStatus.LOADING) return;
       this.setState({
         ...this.state,
