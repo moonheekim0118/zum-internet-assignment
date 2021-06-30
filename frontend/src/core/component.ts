@@ -1,9 +1,10 @@
-import { observe } from './store';
+import { observe } from "./store";
 
 class Component<IProps = unknown, IState = unknown> {
   protected $container: HTMLElement = document.createElement("div");
   protected children: Component[] = [];
   protected props: IProps;
+  protected state: IState = {} as IState;
   private events: {
     type: keyof HTMLElementEventMap;
     handler: EventListener;
@@ -18,6 +19,7 @@ class Component<IProps = unknown, IState = unknown> {
   protected bindEvents(): void {}
   protected initDom(): void {}
   protected initChildren(): void {}
+  protected initState(): void {}
   protected componentWillUpdate(): void {}
   protected render(): void {}
 
@@ -38,6 +40,7 @@ class Component<IProps = unknown, IState = unknown> {
   public mount(): HTMLElement {
     this.render();
     this.bindEvents();
+    this.initState();
     this.children.forEach((child) => {
       this.$container.appendChild(child.mount());
     });
@@ -76,7 +79,8 @@ class Component<IProps = unknown, IState = unknown> {
     this.$container.addEventListener(type, handler);
   }
 
-  public setState(nextState:IState): void {
+  public setState(nextState: IState): void {
+    this.state = nextState;
     this.updateComponent();
   }
 
@@ -86,7 +90,7 @@ class Component<IProps = unknown, IState = unknown> {
   }
 
   protected beforeChangeURL() {}
-//   public pageInfo(): IPageInfo | void {}
+  //   public pageInfo(): IPageInfo | void {}
 }
 
 export default Component;
