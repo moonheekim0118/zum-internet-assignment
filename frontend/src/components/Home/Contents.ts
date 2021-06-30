@@ -3,13 +3,13 @@ import { newElement } from "@/utils/dom";
 import { CardList, Loader, Error } from "@/components/Shared";
 import { IHubContents, ApiStatus } from "@/types";
 import { CONTENTS_REQUEST } from "@/actions/contents";
-import { contentsStore } from "@/stores";
+import { hubContentsStore } from "@/stores";
 
 // TODO : 렌더링 map으로 리팩토링하기
 
 class ContentsList extends Component {
   protected useSelector() {
-    return contentsStore.getState();
+    return hubContentsStore.getState();
   }
 
   protected initDom(): void {
@@ -17,7 +17,7 @@ class ContentsList extends Component {
   }
 
   protected componentWillMount(): void {
-    contentsStore.dispatch(CONTENTS_REQUEST());
+    hubContentsStore.dispatch(CONTENTS_REQUEST());
   }
 
   protected render(): void {

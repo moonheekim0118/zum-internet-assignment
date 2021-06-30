@@ -28,7 +28,6 @@ class Router<IPage> {
     this.unmount();
     const href = this.pathanme();
     this.prevHref = href;
-    history.pushState({ url: window.location.hash }, "hashPath");
     const $main = $("main");
     $main.innerHTML = "";
     if (this.pages[href]) {
