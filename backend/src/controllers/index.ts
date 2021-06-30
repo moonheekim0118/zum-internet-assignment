@@ -74,8 +74,9 @@ export const contentsInfinite = async (
     const index = contents.findIndex((content) => content.idx === lastKey);
 
     const parsedData = contents.slice(index + 1, index + INFINITE_CONTENTS + 1);
-    const hasMore = parsedData.length === INFINITE_CONTENTS;
-    return res.status(200).json({parsedData, hasMore });
+    const size = parsedData.length;
+    const hasMore = size === INFINITE_CONTENTS;
+    return res.status(200).json({contents:parsedData, hasMore, lastKey:parsedData[size-1].idx });
   } catch (error) {
     console.error(error.stack);
     return res

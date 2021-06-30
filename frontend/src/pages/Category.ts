@@ -26,7 +26,7 @@ class Category extends Component<{}, IState> {
 
   protected componentWillMount(): void {
     const category = router.pathanme().replace("/", "") as CategoryType;
-    this.state = { category };
+    this.setState({ category });
     this.handleGetMoreData();
     new IntersectionObserver(
       { $root: this.$container, rootMargin: "0px", threshold: 1.0 },
@@ -36,14 +36,19 @@ class Category extends Component<{}, IState> {
   }
 
   protected render(): void {
-    const { status, contents } = this.useSelector();
+    const { status, data } = this.useSelector();
+
+    console.log(data, this.state);
 
     const renderByStatus = {
       [ApiStatus.LOADING]: () =>
-        contents
-          ? `${CardList({ contentsList: contents })} ${Loader()}`
+        data[this.state.category]?.contents
+          ? `${CardList({
+              contentsList: data[this.state.category].contents,
+            })} ${Loader()}`
           : Loader(),
-      [ApiStatus.DONE]: () => CardList({ contentsList: contents }),
+      [ApiStatus.DONE]: () =>
+        CardList({ contentsList: data[this.state.category]?.contents ?? [] }),
       [ApiStatus.FAIL]: () => Error(),
     };
 
