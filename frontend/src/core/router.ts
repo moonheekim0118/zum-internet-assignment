@@ -11,6 +11,7 @@ class Router<IPage> {
 
   public push(href: string): void {
     window.location.hash = href.replace("/", "#");
+    this.render();
   }
 
   private bindEvents(): void {
@@ -21,8 +22,7 @@ class Router<IPage> {
 
   private render(): void {
     const href = this.pathanme();
-    console.log(href);
-    const $main = $("#main");
+    const $main = $("main");
     $main.innerHTML = "";
     if (this.pages[href]) {
       $main.appendChild(this.pages[href].mount());

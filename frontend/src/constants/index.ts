@@ -1,7 +1,9 @@
 export enum PATH {
-    HOME = '/',
-    CATEGORY='/category',
-    DETAIL='/detail',
-    BOOKMARK='/bookmark'
-};
-
+  HOME = "/",
+  LIFE = "/life",
+  FOOD = "/food",
+  TRAVEL = "/travel",
+  CULTURE = "/culture",
+  DETAIL = "/detail",
+  BOOKMARK = "/bookmark",
+}

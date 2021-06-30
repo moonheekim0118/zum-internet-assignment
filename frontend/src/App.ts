@@ -1,6 +1,7 @@
 import { Component } from "@/core";
 import { Layout } from "@/components";
 import { $ } from "@/utils/dom";
+import router from "@/router";
 
 class App extends Component {
   protected initDom(): void {
@@ -11,6 +12,7 @@ class App extends Component {
     const layout = new Layout();
     this.children = [layout];
     this.mount();
+    router.push("/");
   }
 }
 

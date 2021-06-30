@@ -9,7 +9,10 @@ type IPage = {
 
 const router = new Router<IPage>({
   [PATH.HOME]: new Home(),
-  [PATH.CATEGORY]: new Home(),
+  [PATH.CULTURE]: new Home(),
+  [PATH.LIFE]: new Home(),
+  [PATH.TRAVEL]: new Home(),
+  [PATH.FOOD]: new Home(),
   [PATH.BOOKMARK]: new Home(),
   [PATH.DETAIL]: new Home(),
 });
