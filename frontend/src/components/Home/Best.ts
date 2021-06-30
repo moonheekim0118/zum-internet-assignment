@@ -23,7 +23,7 @@ class Best extends Component {
 
     const renderByStatus = {
       [ApiStatus.LOADING]: () => Loader(),
-      [ApiStatus.DONE]: (data: IBest[]) => ` 
+      [ApiStatus.DONE]: () => ` 
       <h3>실시간 TOP 12</h3>
       <ul>
       ${data
@@ -46,7 +46,7 @@ class Best extends Component {
         </ul>`,
       [ApiStatus.FAIL]: () => Error(),
     };
-    this.$container.innerHTML = renderByStatus[status](data);
+    this.$container.innerHTML = status ? renderByStatus[status]() : "";
   }
 }
 

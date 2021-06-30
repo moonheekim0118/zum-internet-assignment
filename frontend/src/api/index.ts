@@ -21,7 +21,7 @@ const api = {
     return data;
   },
 
-  getInfiniteContents: async (category: string, lastKey: number) => {
+  getInfiniteContents: async (category: Category, lastKey: number | string) => {
     const data = await request(`/content/${category}/${lastKey}`);
     return data;
   },

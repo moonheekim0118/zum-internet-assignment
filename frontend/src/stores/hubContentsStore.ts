@@ -4,13 +4,13 @@ import { actions } from "@/actions/hubContents";
 import { mainService } from "@/service";
 
 interface IState {
-  status: ApiStatus;
+  status: ApiStatus | null;
   data: IHubContents | null;
   error: string | null;
 }
 
 const initialState = {
-  status: ApiStatus.LOADING,
+  status: null,
   data: null,
   error: null,
 };
@@ -18,6 +18,7 @@ const initialState = {
 class HubContentsStore extends Store<IState> {
   protected reducer = {
     [actions.GET_REQUEST]: () => {
+      if (this.state.status === ApiStatus.LOADING) return;
       this.setState({ ...this.state, status: ApiStatus.LOADING });
       mainService.getContentsData();
     },

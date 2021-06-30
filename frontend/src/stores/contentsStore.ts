@@ -4,26 +4,28 @@ import { ApiStatus, IContents, Category } from "@/types";
 import { contentsService } from "@/service";
 
 interface IState {
-  status: ApiStatus;
+  status: ApiStatus | null;
   category: Category;
   hasMore: boolean;
   lastKey: number;
-  contents: IContents[] | null;
+  contents: IContents[];
   error: string | null;
 }
 
 const initialState = {
-  status: ApiStatus.LOADING,
+  status: null,
   category: Category.culture,
   hasMore: true,
   lastKey: 0,
-  contents: null,
+  contents: [],
   error: null,
 };
 
 class ContentsStore extends Store<IState> {
   protected reducer = {
     [actions.GET_REQUEST]: ({ data }) => {
+      const { hasMore, status } = this.state;
+      if (!hasMore || status === ApiStatus.LOADING) return;
       this.setState({
         ...this.state,
         category: data,
@@ -33,12 +35,13 @@ class ContentsStore extends Store<IState> {
     },
     [actions.GET_SUCCESS]: ({ data }) => {
       const { hasMore, lastKey, contents } = data;
+      const mergedContents = [...this.state.contents, ...contents];
       this.setState({
         ...this.state,
         status: ApiStatus.DONE,
         hasMore,
         lastKey,
-        contents,
+        contents: mergedContents,
       });
     },
     [actions.GET_FAIL]: ({ error }) => {

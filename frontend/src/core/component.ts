@@ -2,6 +2,7 @@ import { observe } from "./store";
 
 class Component<IProps = unknown, IState = unknown> {
   protected $container: HTMLElement = document.createElement("div");
+  protected $observer: HTMLElement;
   protected children: Component[] = [];
   protected props: IProps;
   protected state: IState = {} as IState;
