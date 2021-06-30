@@ -7,10 +7,15 @@ import serverCache from "@/api/serverCache";
 const contentsService = {
   getData: async (category, lastKey) => {
     try {
-      const data = await api.getInfiniteContents(category, lastKey);
+      let data;
+      if (serverCache.has(`/contents/${category}`)) {
+        data = serverCache.get(`/contents/${category}`);
+      } else {
+        data = await api.getInfiniteContents(category, lastKey);
+        serverCache.set(`/contents/${category}`, data);
+      }
       return contentsStore.dispatch(CONTENTS_SUCCESS(data));
     } catch (error) {
-      console.error(error);
       return contentsStore.dispatch(CONTENTS_FAIL(error));
     }
   },
