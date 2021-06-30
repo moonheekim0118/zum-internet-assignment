@@ -1,17 +1,18 @@
-import { IContents } from "@/types";
+import { IContents, Category } from "@/types";
 
 interface IProps {
+  category: Category;
   contentsList: IContents[];
 }
 
-function CardList({ contentsList }: IProps): string {
+function CardList({ category, contentsList }: IProps): string {
   return `
     <div class="contents-list">
         ${contentsList
           .map(({ idx, imageUrl, title, mediaName, summaryContent }) => {
             return `
             <article class="contents-card" data-index=${idx}>
-                <a href="#detail/${idx}">
+                <a href="#detail/${category}/${idx}">
                     <img src="${imageUrl}"/>
                     <h3>${title}</h3>
                     <span class="summary">

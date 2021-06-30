@@ -6,7 +6,13 @@ class Router<IPage> {
     this.bindEvents();
   }
 
-  public pathanme(): string {
+  public pathList(): string[] {
+    const list = this.pathname().split("/");
+    list.shift();
+    return list;
+  }
+
+  public pathname(): string {
     return window.location.hash.replace("#", "/") || "/";
   }
 
@@ -21,12 +27,13 @@ class Router<IPage> {
 
   private unmount(): void {
     if (!this.prevHref) return;
-    this.pages[this.prevHref].componentWillUnmount();
+    this.pages[this.prevHref]?.componentWillUnmount();
   }
 
   private render(): void {
     this.unmount();
-    const href = this.pathanme();
+    const href = `/${this.pathList()[0]}`;
+
     this.prevHref = href;
     const $main = $("main");
     $main.innerHTML = "";

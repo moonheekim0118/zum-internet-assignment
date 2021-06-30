@@ -12,19 +12,15 @@ const request = async (endPoint, option = {}) => {
 };
 
 const api = {
-  getBest: async () => {
-    const data = await request("/best");
-    return data;
-  },
-  getSummaryContents: async () => {
-    const data = await request("/content");
-    return data;
-  },
-
+  getBest: () => request("/best"),
+  getSummaryContents: () => request("/content"),
   getInfiniteContents: async (category: Category, lastKey: number | string) => {
     const data = await request(`/content/${category}/${lastKey}`);
     return { ...data, category };
   },
+
+  getDetailContent: (category: string, index: string) =>
+    request(`/detail/${category}/${index}`),
 };
 
 export default api;

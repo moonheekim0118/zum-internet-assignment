@@ -1,5 +1,5 @@
 import { Component, Router } from "@/core";
-import { Home, Category } from "@/pages";
+import { Home, Category, Detail } from "@/pages";
 
 import { PATH } from "@/constants";
 
@@ -14,7 +14,7 @@ const router = new Router<IPage>({
   [PATH.TRAVEL]: new Category(),
   [PATH.FOOD]: new Category(),
   [PATH.BOOKMARK]: new Home(),
-  [PATH.DETAIL]: new Home(),
+  [PATH.DETAIL]: new Detail(),
 });
 
 export default router;

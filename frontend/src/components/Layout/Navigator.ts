@@ -12,7 +12,7 @@ class Navigator extends Component {
   }
 
   private checkPath(path: string): boolean {
-    return router.pathanme() === path;
+    return router.pathname() === path;
   }
 
   protected render(): void {
