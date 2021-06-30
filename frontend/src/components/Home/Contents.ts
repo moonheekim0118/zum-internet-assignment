@@ -22,8 +22,6 @@ class ContentsList extends Component {
 
   protected render(): void {
     const { data, status } = this.useSelector();
-
-    console.log(data);
     const renderByStatus = {
       [ApiStatus.LOADING]: () => Loader(),
       [ApiStatus.DONE]: (data: IHubContents) => `

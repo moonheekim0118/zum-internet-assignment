@@ -3,6 +3,10 @@ import { newElement } from "@/utils/dom";
 import router from "@/router";
 
 class Navigator extends Component {
+  constructor() {
+    super();
+    window.addEventListener("hashchange", () => this.render());
+  }
   protected initDom(): void {
     this.$container = newElement(`<nav/>`);
   }

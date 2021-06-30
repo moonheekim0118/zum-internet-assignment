@@ -24,6 +24,7 @@ class Best extends Component {
     const renderByStatus = {
       [ApiStatus.LOADING]: () => Loader(),
       [ApiStatus.DONE]: (data: IBest[]) => ` 
+      <h3>실시간 TOP 12</h3>
       <ul>
       ${data
         .map(({ idx, title, mediaName, url }, rank) => {
