@@ -1,5 +1,5 @@
 import { Component } from "@/core";
-import { Contents } from "@/components/Home";
+import { Contents, Best } from "@/components/Home";
 import { newElement } from "@/utils/dom";
 
 class Home extends Component {
@@ -9,7 +9,8 @@ class Home extends Component {
 
   protected initChildren(): void {
     const contents = new Contents();
-    this.children = [contents];
+    const best = new Best();
+    this.children = [contents, best];
   }
 }
 
