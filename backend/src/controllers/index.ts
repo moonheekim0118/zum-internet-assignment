@@ -2,6 +2,10 @@ import express from "express";
 import { bestData, contentsData } from "../data";
 import { INIT_CONTENTS, INFINITE_CONTENTS } from "../constant";
 
+interface Object{
+  [key: string] : unknown;
+}
+
 enum Category {
   life = "life",
   culture = "culture",
@@ -11,7 +15,7 @@ enum Category {
 
 export const best = async (req: express.Request, res: express.Response) => {
   try {
-    return res.status(200).json({ data: bestData });
+    return res.status(200).json(bestData);
   } catch (error) {
     console.error(error.stack);
     return res
@@ -20,13 +24,16 @@ export const best = async (req: express.Request, res: express.Response) => {
   }
 };
 
+
 // 상위 4개 보여주는 api
 export const contents = async (req: express.Request, res: express.Response) => {
   try {
-    const category = req.params.category as Category;
-    const contents = contentsData[category].slice(0, INIT_CONTENTS);
+    const contents = {} as Object;
+    for(let key in contentsData){
+      contents[key]=contentsData[key as Category].slice(0, INIT_CONTENTS);
+    } 
     if (!contents) throw new Error("Not Found Category");
-    return res.status(200).json({ data: contents });
+    return res.status(200).json(contents);
   } catch (error) {
     console.error(error.stack);
     return res
@@ -43,7 +50,7 @@ export const contentsDetail = async(req: express.Request,
       const { category , index} = req.params;
       const contents = contentsData[category as Category].find((content)=>content.idx===+index);
       if(!contents) throw new Error("Not Found data");
-      return res.status(200).json({ data: contents });
+      return res.status(200).json(contents);
     }catch(error){
       console.error(error.stack);
       return res
@@ -68,7 +75,7 @@ export const contentsInfinite = async (
 
     const parsedData = contents.slice(index + 1, index + INFINITE_CONTENTS + 1);
     const hasMore = parsedData.length === INFINITE_CONTENTS;
-    return res.status(200).json({ data: parsedData, hasMore });
+    return res.status(200).json({parsedData, hasMore });
   } catch (error) {
     console.error(error.stack);
     return res
