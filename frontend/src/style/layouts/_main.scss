@@ -1,9 +1,6 @@
 main {
-  width: 100%;
-  height: 100%;
-
-  div {
-    min-height: 100vh;
+  min-height: 50vh;
+  .render {
     padding: var(--space-xl);
   }
 }

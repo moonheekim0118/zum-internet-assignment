@@ -4,7 +4,7 @@ import { newElement } from "@/utils/dom";
 
 class Home extends Component {
   protected initDom(): void {
-    this.$container = newElement(`<div/>`);
+    this.$container = newElement(`<div class="render"/>`);
   }
 
   protected initChildren(): void {

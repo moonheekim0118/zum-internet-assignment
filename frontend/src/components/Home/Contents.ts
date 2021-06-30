@@ -51,10 +51,22 @@ class ContentsList extends Component {
 
   protected render(): void {
     this.$container.innerHTML = `
-      <div class="contents-detail">
-        <h4>#컬쳐</h4>
-        ${CardList({ contentsList: mock })}
-      </div>
+    <div class="contents-detail">
+      <h4>#컬쳐</h4>
+      ${CardList({ contentsList: mock })}
+    </div>
+    <div class="contents-detail">
+      <h4>#컬쳐</h4>
+      ${CardList({ contentsList: mock })}
+    </div>
+    <div class="contents-detail">
+      <h4>#컬쳐</h4>
+      ${CardList({ contentsList: mock })}
+    </div>
+    <div class="contents-detail">
+      <h4>#컬쳐</h4>
+      ${CardList({ contentsList: mock })}
+    </div>
     `;
   }
 }
