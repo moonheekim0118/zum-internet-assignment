@@ -1,4 +1,3 @@
-
 let currentObserver = null;
 
 export const observe = (selector: Function, cb: Function): void => {
@@ -9,7 +8,7 @@ export const observe = (selector: Function, cb: Function): void => {
 
 class Store<IState> {
   protected state: IState;
-  protected mutations: Record<string, Function>;
+  protected reducer: Record<string, Function>;
   protected observers: Set<Function>;
 
   constructor(initState: IState) {
@@ -17,8 +16,8 @@ class Store<IState> {
     this.observers = new Set();
   }
 
-  public dispatch({ type, datas = null, error = null }): void {
-    this.mutations[type]({ datas, error });
+  public dispatch({ type, data = null, error = null }): void {
+    this.reducer[type]({ data, error });
   }
 
   public getState(): IState {

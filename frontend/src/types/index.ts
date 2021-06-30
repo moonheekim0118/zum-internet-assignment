@@ -31,3 +31,9 @@ export interface IHubContents {
   [Category.life]: IContents[];
   [Category.travel]: IContents[];
 }
+
+export enum ApiStatus {
+  LOADING = "LOADING",
+  DONE = "DONE",
+  FAIL = "FAIL",
+}

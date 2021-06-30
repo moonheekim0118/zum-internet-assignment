@@ -20,6 +20,7 @@ class Component<IProps = unknown, IState = unknown> {
   protected initDom(): void {}
   protected initChildren(): void {}
   protected initState(): void {}
+  protected componentWillMount(): void {}
   protected componentWillUpdate(): void {}
   protected render(): void {}
 
@@ -38,6 +39,7 @@ class Component<IProps = unknown, IState = unknown> {
   }
 
   public mount(): HTMLElement {
+    this.componentWillMount();
     this.render();
     this.bindEvents();
     this.initState();
