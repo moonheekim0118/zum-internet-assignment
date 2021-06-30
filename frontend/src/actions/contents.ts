@@ -1,4 +1,4 @@
-import { IHubContents } from "@/types";
+import { IContentsList, Category } from "@/types";
 
 export enum actions {
   GET_REQUEST = "GET_REQUEST",
@@ -6,11 +6,11 @@ export enum actions {
   GET_FAIL = "GET_FAIL",
 }
 
-export const CONTENTS_REQUEST = () => {
-  return { type: actions.GET_REQUEST };
+export const CONTENTS_REQUEST = (data: Category) => {
+  return { type: actions.GET_REQUEST, data };
 };
 
-export const CONTENTS_SUCCESS = (data: IHubContents) => {
+export const CONTENTS_SUCCESS = (data: IContentsList) => {
   return { type: actions.GET_SUCCESS, data };
 };
 

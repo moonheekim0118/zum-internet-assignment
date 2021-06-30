@@ -37,3 +37,9 @@ export enum ApiStatus {
   DONE = "DONE",
   FAIL = "FAIL",
 }
+
+export interface IContentsList {
+  contents: IContents[];
+  hasMore: boolean;
+  lastKey: number;
+}

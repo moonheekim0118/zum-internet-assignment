@@ -1,5 +1,5 @@
 import api from "@/api";
-import { CONTENTS_SUCCESS, CONTENTS_FAIL } from "@/actions/contents";
+import { HUBCONTENTS_SUCCESS, HUBCONTENTS_FAIL } from "@/actions/hubContents";
 import { BEST_SUCCESS, BEST_FAIL } from "@/actions/best";
 import { hubContentsStore, bestStore } from "@/stores";
 import serverCache from "@/api/serverCache";
@@ -14,9 +14,9 @@ const mainService = {
         data = await api.getSummaryContents();
         serverCache.set("/content", data);
       }
-      return hubContentsStore.dispatch(CONTENTS_SUCCESS(data));
+      return hubContentsStore.dispatch(HUBCONTENTS_SUCCESS(data));
     } catch (error) {
-      return hubContentsStore.dispatch(CONTENTS_FAIL(error));
+      return hubContentsStore.dispatch(HUBCONTENTS_FAIL(error));
     }
   },
 

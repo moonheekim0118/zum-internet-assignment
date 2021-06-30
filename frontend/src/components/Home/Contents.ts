@@ -2,7 +2,7 @@ import { Component } from "@/core";
 import { newElement } from "@/utils/dom";
 import { CardList, Loader, Error } from "@/components/Shared";
 import { IHubContents, ApiStatus } from "@/types";
-import { CONTENTS_REQUEST } from "@/actions/contents";
+import { HUBCONTENTS_REQUEST } from "@/actions/hubContents";
 import { hubContentsStore } from "@/stores";
 
 // TODO : 렌더링 map으로 리팩토링하기
@@ -17,7 +17,7 @@ class ContentsList extends Component {
   }
 
   protected componentWillMount(): void {
-    hubContentsStore.dispatch(CONTENTS_REQUEST());
+    hubContentsStore.dispatch(HUBCONTENTS_REQUEST());
   }
 
   protected render(): void {

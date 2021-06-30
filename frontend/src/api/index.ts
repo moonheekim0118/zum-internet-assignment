@@ -20,6 +20,11 @@ const api = {
     const data = await request("/content");
     return data;
   },
+
+  getInfiniteContents: async (category: string, lastKey: number) => {
+    const data = await request(`/content/${category}/${lastKey}`);
+    return data;
+  },
 };
 
 export default api;
