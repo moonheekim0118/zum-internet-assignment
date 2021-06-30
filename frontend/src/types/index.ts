@@ -17,3 +17,17 @@ export interface IBest {
   mediaName: string;
   url: string;
 }
+
+export enum Category {
+  life = "life",
+  culture = "culture",
+  food = "food",
+  travel = "travel",
+}
+
+export interface IHubContents {
+  [Category.culture]: IContents[];
+  [Category.food]: IContents[];
+  [Category.life]: IContents[];
+  [Category.travel]: IContents[];
+}
