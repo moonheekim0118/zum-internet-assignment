@@ -1,11 +1,11 @@
 import { Store } from "@/core";
-import { ApiStatus, IHubContents } from "@/types";
-import { actions } from "@/actions/contents";
+import { ApiStatus, IBest } from "@/types";
+import { actions } from "@/actions/best";
 import { mainService } from "@/service";
 
 interface IState {
   status: ApiStatus;
-  data: IHubContents | null;
+  data: IBest[] | null;
   error: string | null;
 }
 
@@ -15,20 +15,19 @@ const initialState = {
   error: null,
 };
 
-class ContentsStore extends Store<IState> {
+class BestStore extends Store<IState> {
   protected reducer = {
     [actions.GET_REQUEST]: () => {
-      this.setState({ ...this.state, status: ApiStatus.LOADING });
-      mainService.getContentsData();
+      mainService.getBestData();
     },
     [actions.GET_SUCCESS]: ({ data }) => {
       this.setState({ ...this.state, status: ApiStatus.DONE, data });
     },
     [actions.GET_FAIL]: ({ error }) => {
-      this.setState({ ...this.state, status: ApiStatus.FAIL });
+      this.setState({ ...this.state, status: ApiStatus.FAIL, error });
     },
   };
 }
 
-const contentsStore = new ContentsStore(initialState);
-export default contentsStore;
+const bestStore = new BestStore(initialState);
+export default bestStore;

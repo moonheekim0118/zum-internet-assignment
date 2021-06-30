@@ -1,38 +1,28 @@
 import { Component } from "@/core";
 import { newElement } from "@/utils/dom";
-import { IBest } from "@/types";
-import api from "@/api";
+import { ApiStatus, IBest } from "@/types";
+import { bestStore } from "@/stores";
+import { BEST_REQUEST } from "@/actions/best";
 
-interface IState {
-  data: IBest[] | null;
-}
-
-class Best extends Component<{}, IState> {
-  constructor() {
-    super();
-    this.state = { data: null };
+class Best extends Component {
+  protected useSelector() {
+    return bestStore.getState();
   }
+
   protected initDom(): void {
     this.$container = newElement(`<section class="best-container"/>`);
   }
 
-  protected async initState(): Promise<void> {
-    try {
-      const data = await api.getBest();
-      this.setState({ data });
-    } catch (error) {
-      alert("다시시도해주세여");
-    }
+  protected componentWillMount(): void {
+    bestStore.dispatch(BEST_REQUEST());
   }
 
   protected render(): void {
-    const { data } = this.state;
-    this.$container.innerHTML = `
-    <h3>실시간 TOP 12</h3>
-      ${
-        !data
-          ? "로딩중"
-          : `
+    const { data, status } = this.useSelector();
+
+    const renderByStatus = {
+      [ApiStatus.LOADING]: () => `<h3>데이터를 가져오는 중..</h3>`,
+      [ApiStatus.DONE]: (data: IBest[]) => ` 
       <ul>
       ${data
         .map(({ idx, title, mediaName, url }, rank) => {
@@ -47,13 +37,14 @@ class Best extends Component<{}, IState> {
                 <span>${mediaName}</span>
               </div>
             </a>
-          </li>`;
+          </li>
+          `;
         })
         .join("")}
-    </ul>
-      `
-      }
-      `;
+        </ul>`,
+      [ApiStatus.FAIL]: () => `<h3>에러가 생겼네용</h3>`,
+    };
+    this.$container.innerHTML = renderByStatus[status](data);
   }
 }
 

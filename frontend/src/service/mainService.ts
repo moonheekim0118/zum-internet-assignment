@@ -1,6 +1,7 @@
 import api from "@/api";
 import { CONTENTS_SUCCESS, CONTENTS_FAIL } from "@/actions/contents";
-import { contentsStore } from "@/stores";
+import { BEST_SUCCESS, BEST_FAIL } from "@/actions/best";
+import { contentsStore, bestStore } from "@/stores";
 import serverCache from "@/api/serverCache";
 
 const mainService = {
@@ -16,6 +17,21 @@ const mainService = {
       return contentsStore.dispatch(CONTENTS_SUCCESS(data));
     } catch (error) {
       return contentsStore.dispatch(CONTENTS_FAIL(error));
+    }
+  },
+
+  getBestData: async () => {
+    try {
+      let data;
+      if (serverCache.has("/best")) {
+        data = serverCache.get("/best");
+      } else {
+        data = await api.getBest();
+        serverCache.set("/best", data);
+      }
+      return bestStore.dispatch(BEST_SUCCESS(data));
+    } catch (error) {
+      return bestStore.dispatch(BEST_FAIL(error));
     }
   },
 };
