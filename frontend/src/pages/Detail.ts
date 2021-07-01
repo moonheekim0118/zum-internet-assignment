@@ -38,12 +38,11 @@ class Detail extends Component<{}, IState> {
       addBookmark: () => {
         const { data } = this.useSelector();
         this.setState({ ...this.state, bookmark: true });
-        bookmarkStore.dispatch(ADD_BOOKMARK_REQUEST(data));
+        bookmarkStore.dispatch(ADD_BOOKMARK_REQUEST(data.contents));
       },
       removeBookmark: () => {
-        const { data } = this.useSelector();
         this.setState({ ...this.state, bookmark: false });
-        bookmarkStore.dispatch(REMOVE_BOOKMARK_REQUEST(data.idx));
+        bookmarkStore.dispatch(REMOVE_BOOKMARK_REQUEST(this.state.index));
       },
     };
     assignAction[id]();
@@ -63,16 +62,7 @@ class Detail extends Component<{}, IState> {
       [ApiStatus.LOADING]: () => Loader(),
       [ApiStatus.DONE]: () => `
         <div class="detail-container">
-          <h1>${data.title}</h1>
-          <span class="author">${data.mediaName}</span>
-          <img src="${data.imageUrl}"/>
-          <span class="full-contents">
-          ${data.summaryContent}
-          </span>
-          <div class="buttons">
-            <button class="secondary-btn" id="list">
-             목록
-            </button>
+           ${data.contentsHTML}
             ${
               this.state.bookmark
                 ? `

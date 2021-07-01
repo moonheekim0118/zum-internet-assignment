@@ -1,4 +1,5 @@
 import express from "express";
+import crawlContetnsHTML from "../crawler";
 import { bestData, contentsData } from "../data";
 import { INIT_CONTENTS, INFINITE_CONTENTS } from "../constant";
 
@@ -54,7 +55,8 @@ export const contentsDetail = async(req: express.Request,
         if(contents) break;
       }
       if(!contents) throw new Error("Not Found data");
-      return res.status(200).json(contents);
+      const contentsHTML = await crawlContetnsHTML(contents.url);
+      return res.status(200).json({contents, contentsHTML});
     }catch(error){
       console.error(error.stack);
       return res

@@ -5,7 +5,10 @@ import actions from "@/actions";
 
 interface IState {
   status: ApiStatus;
-  data: IContents;
+  data: {
+    contents: IContents;
+    contentsHTML: string;
+  } | null;
   error: string | null;
 }
 

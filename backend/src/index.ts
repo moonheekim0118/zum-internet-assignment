@@ -2,7 +2,6 @@ import cors from 'cors';
 import express from "express";
 import apiRouter from "./routes";
 
-
 const app = express();
 const port = 3000;
 
