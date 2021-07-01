@@ -1,8 +1,4 @@
-interface IDataBase {
-  idx: number;
-}
-
-class storage<T extends IDataBase> {
+class storage<T> {
   constructor(readonly key: string, readonly storage: Storage = localStorage) {}
 
   public get(): T[] {
@@ -12,11 +8,6 @@ class storage<T extends IDataBase> {
 
   public set(items: T[]): void {
     this.storage.setItem(this.key, JSON.stringify(items));
-  }
-
-  public has(idx: number): boolean {
-    const datas = this.get();
-    return datas.findIndex((data) => data.idx === idx) !== -1;
   }
 }
 
