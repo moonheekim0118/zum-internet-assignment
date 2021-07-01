@@ -5,7 +5,7 @@ interface IDataBase {
 class storage<T extends IDataBase> {
   constructor(readonly key: string, readonly storage: Storage = localStorage) {}
 
-  public getAll(): T[] {
+  public get(): T[] {
     const items = this.storage.getItem(this.key) ?? "[]";
     return JSON.parse(items);
   }
@@ -15,29 +15,8 @@ class storage<T extends IDataBase> {
   }
 
   public has(idx: number): boolean {
-    const datas = this.getAll();
-    console.log(datas);
+    const datas = this.get();
     return datas.findIndex((data) => data.idx === idx) !== -1;
-  }
-
-  public get(idx: number): T | null {
-    const datas = this.getAll();
-    const item = datas.find((data) => data.idx === idx);
-    return item;
-  }
-
-  public add(item: T): T[] {
-    const datas = this.getAll();
-    const newData = [...datas, item];
-    this.set(newData);
-    return newData;
-  }
-
-  public remove(idx: number): T[] {
-    const datas = this.getAll();
-    const newData = datas.filter((data) => data.idx !== idx);
-    this.set(newData);
-    return newData;
   }
 }
 

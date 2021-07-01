@@ -12,16 +12,16 @@ import {
 const bookmarkService = {
   getData: () => {
     try {
-      const data = bookmarkStorage.getAll();
+      const data = bookmarkStorage.get();
       bookmarkStore.dispatch(BOOKMARK_SUCCESS(data));
     } catch (error) {
       bookmarkStore.dispatch(BOOKMARK_FAIL(error));
     }
   },
-  hasBookmark: (index: string) => {},
   addBookmark: (data) => {
     try {
-      const updatedData = bookmarkStorage.add(data);
+      const updatedData = [data, ...bookmarkStorage.get()];
+      bookmarkStorage.set(updatedData);
       bookmarkStore.dispatch(BOOKMARK_ADD_SUCCESS(updatedData));
     } catch (error) {
       bookmarkStore.dispatch(BOOKMARK_ADD_FAIL(error));
@@ -30,7 +30,10 @@ const bookmarkService = {
 
   removeBookmark: (index) => {
     try {
-      const updatedData = bookmarkStorage.remove(index);
+      const updatedData = bookmarkStorage
+        .get()
+        .filter((data) => data.idx !== index);
+      bookmarkStorage.set(updatedData);
       bookmarkStore.dispatch(BOOKMARK_REMOVE_SUCCESS(updatedData));
     } catch (error) {
       bookmarkStore.dispatch(BOOKMARK_REMOVE_FAIL(error));
