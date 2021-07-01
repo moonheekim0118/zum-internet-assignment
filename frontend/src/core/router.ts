@@ -1,7 +1,6 @@
 import { $ } from "@/utils/dom";
 
 class Router<IPage> {
-  private prevHref = "";
   constructor(readonly pages: IPage) {
     this.bindEvents();
   }
@@ -13,27 +12,29 @@ class Router<IPage> {
   }
 
   public pathname(): string {
-    return window.location.hash.replace("#", "/") || "/";
+    return window.location.href.replace("http://localhost:9000", "");
   }
 
   public push(href: string): void {
-    window.location.hash = href.replace("/", "#");
+    const prevhref = history.state?.href ?? href;
+    history.pushState({ href, prevhref }, null, href);
     this.render();
   }
 
   private bindEvents(): void {
-    window.addEventListener("hashchange", () => this.render());
+    window.addEventListener("popstate", () => this.render());
   }
 
   private unmount(): void {
-    if (!this.prevHref) return;
-    this.pages[this.prevHref]?.componentWillUnmount();
+    if (!history.state) return;
+    const { href, prevhref } = history.state;
+    if (href === prevhref) return;
+    this.pages[prevhref].componentWillUnmount();
   }
 
   private render(): void {
     this.unmount();
     const href = `/${this.pathList()[0]}`;
-    this.prevHref = href;
     const $main = $("main");
     $main.innerHTML = "";
     if (this.pages[href]) {

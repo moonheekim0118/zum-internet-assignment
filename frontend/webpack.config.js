@@ -1,19 +1,20 @@
 const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 module.exports = {
-  entry: {
-    main: "./src/index.ts",
-  },
-  watch: true,
+  entry: "./src/index.ts",
   devServer: {
     contentBase: path.join(__dirname, "public"),
     compress: true,
     port: 9000,
+    historyApiFallback: {
+      index: path.resolve(__dirname, "public/index.html"),
+    },
   },
   devtool: "inline-source-map",
   output: {
     path: path.resolve(__dirname, "public"),
-    filename: "[name].bundle.js",
+    publicPath: "public",
+    filename: "bundle.js",
   },
   module: {
     rules: [

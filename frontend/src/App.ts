@@ -12,7 +12,7 @@ class App extends Component {
     const layout = new Layout();
     this.children = [layout];
     this.mount();
-    router.push("/");
+    router.push(router.pathname());
   }
 }
 

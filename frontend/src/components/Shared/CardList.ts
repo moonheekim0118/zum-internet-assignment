@@ -1,6 +1,7 @@
-import { IContents, Category } from "@/types";
+import { IContents } from "@/types";
 import { isBookMarked } from "@/storage";
 import { StarIcon } from "@/components/Shared";
+import { PATH } from "@/constants";
 
 interface IProps {
   contentsList: IContents[];
@@ -13,7 +14,7 @@ function CardList({ contentsList }: IProps): string {
           .map(({ idx, imageUrl, title, mediaName, summaryContent }) => {
             return `
             <article class="contents-card" data-index=${idx}>
-                <a href="#detail/${idx}">
+                <a href="${PATH.DETAIL}/${idx}">
                     <img src="${imageUrl}"/>
                     <h3>${title}</h3>
                     <span class="summary">

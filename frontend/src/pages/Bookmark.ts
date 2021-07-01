@@ -3,6 +3,7 @@ import { newElement } from "@/utils/dom";
 import { bookmarkStore } from "@/stores";
 import { Loader, Error } from "@/components/Shared";
 import { ApiStatus } from "@/types";
+import { PATH } from "@/constants";
 import { BOOKMARK_REQUEST } from "@/actions/bookmark";
 
 class Bookmark extends Component {
@@ -28,7 +29,7 @@ class Bookmark extends Component {
           : `${data.map(
               ({ idx, title, imageUrl, mediaName, summaryContent }) => `
           <article class="bookmark" data-id=${idx}>
-            <a href="#detail/${idx}">
+            <a href="${PATH.DETAIL}/${idx}">
             <img src="${imageUrl}"/>
             <div class="bookmark-detail">
               <h3>${title}</h3>
