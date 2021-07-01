@@ -18,15 +18,15 @@ interface IState {
 }
 
 class Detail extends Component<{}, IState> {
-  constructor() {
-    super();
-    this.rootEvent("click", (e: Event) => this.handleButtonClick(e));
-  }
   protected useSelector() {
     return singleContentStore.getState();
   }
   protected initDom(): void {
     this.$container = newElement(`<div class="render"/>`);
+  }
+
+  protected bindEvents(): void {
+    this.rootEvent("click", (e: Event) => this.handleButtonClick(e));
   }
 
   private handleButtonClick({ target }): void {

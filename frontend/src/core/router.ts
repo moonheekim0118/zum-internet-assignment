@@ -33,7 +33,6 @@ class Router<IPage> {
   private render(): void {
     this.unmount();
     const href = `/${this.pathList()[0]}`;
-
     this.prevHref = href;
     const $main = $("main");
     $main.innerHTML = "";
