@@ -30,7 +30,7 @@ class Bookmark extends Component {
               ({ idx, title, imageUrl, mediaName, summaryContent }) => `
           <article class="bookmark" data-id=${idx}>
             <a href="${PATH.DETAIL}/${idx}">
-            <img src="${imageUrl}" loading="lazy"/>
+            <img src="${imageUrl}" alt="썸네일 이미지" loading="lazy"/>
             <div class="bookmark-detail">
               <h3>${title}</h3>
               <span class="author">${mediaName}</span>
