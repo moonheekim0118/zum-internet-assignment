@@ -1,6 +1,6 @@
 let currentObserver = null;
 
-export const observe = (selector: Function, cb: Function): void => {
+export const storeObserve = (selector: Function, cb: Function): void => {
   currentObserver = cb;
   selector();
   currentObserver = null;

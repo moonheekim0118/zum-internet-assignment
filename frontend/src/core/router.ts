@@ -1,8 +1,18 @@
 import { $, closest } from "@/utils/dom";
 
+let currentObserver = null;
+
+export const routerObserve = (selector: Function, cb: Function): void => {
+  currentObserver = cb;
+  selector();
+  currentObserver = null;
+};
+
 class Router<IPage> {
+  protected observers: Set<Function>;
   constructor(readonly pages: IPage) {
     this.bindEvents();
+    this.observers = new Set();
   }
 
   public pathList(): string[] {
@@ -12,6 +22,7 @@ class Router<IPage> {
   }
 
   public pathname(): string {
+    if (currentObserver) this.observers.add(currentObserver);
     return (
       history.state?.href ??
       window.location.href.replace("http://localhost:9000", "")
@@ -19,7 +30,7 @@ class Router<IPage> {
   }
 
   public push(href: string): void {
-    const prevhref = history.state?.href ?? href;
+    const prevhref = "/" + this.pathList()[0];
     history.pushState({ href, prevhref }, null, href);
     this.render();
   }
@@ -53,6 +64,7 @@ class Router<IPage> {
     if (this.pages[href]) {
       $main.appendChild(this.pages[href].mount());
     }
+    this.observers.forEach((observer) => observer());
     // TODO: NOT FOUND
   }
 }

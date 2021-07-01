@@ -1,25 +1,18 @@
 import { Component } from "@/core";
-import { newElement, closest } from "@/utils/dom";
+import { newElement } from "@/utils/dom";
 import { PATH } from "@/constants";
 import router from "@/router";
 
 class Navigator extends Component {
-  constructor() {
-    super();
-    window.addEventListener("click", (e: Event) => {
-      e.preventDefault();
-      const target = e.target as HTMLElement;
-      const anchor = closest(target, "a") as HTMLAnchorElement;
-      if (!anchor) return;
-      this.render();
-    });
+  protected usePathName(): string {
+    return router.pathname();
   }
   protected initDom(): void {
     this.$container = newElement(`<nav/>`);
   }
 
   private checkPath(path: string): boolean {
-    return router.pathname() === path;
+    return this.usePathName() === path;
   }
 
   protected render(): void {

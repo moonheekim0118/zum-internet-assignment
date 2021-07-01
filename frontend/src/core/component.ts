@@ -1,4 +1,5 @@
-import { observe } from "./store";
+import { storeObserve } from "./store";
+import { routerObserve } from "./router";
 
 class Component<IProps = unknown, IState = unknown> {
   protected $container: HTMLElement = document.createElement("div");
@@ -17,6 +18,7 @@ class Component<IProps = unknown, IState = unknown> {
   }
 
   protected useSelector(): void {}
+  protected usePathName(): void {}
   protected bindEvents(): void {}
   protected initDom(): void {}
   protected initChildren(): void {}
@@ -33,9 +35,13 @@ class Component<IProps = unknown, IState = unknown> {
     this.initDom();
     this.initChildren();
     this.render();
-    observe(
+    storeObserve(
       () => this.useSelector(),
       () => this.updateComponent()
+    );
+    routerObserve(
+      () => this.usePathName(),
+      () => this.render()
     );
   }
 
