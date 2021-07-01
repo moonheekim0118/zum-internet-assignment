@@ -21,8 +21,8 @@ const bookmarkService = {
   hasBookmark: (index: string) => {},
   addBookmark: (data) => {
     try {
-      bookmarkStorage.add(data);
-      bookmarkStore.dispatch(BOOKMARK_ADD_SUCCESS(data));
+      const updatedData = bookmarkStorage.add(data);
+      bookmarkStore.dispatch(BOOKMARK_ADD_SUCCESS(updatedData));
     } catch (error) {
       bookmarkStore.dispatch(BOOKMARK_ADD_FAIL(error));
     }
@@ -30,8 +30,8 @@ const bookmarkService = {
 
   removeBookmark: (index) => {
     try {
-      bookmarkStorage.remove(index);
-      bookmarkStore.dispatch(BOOKMARK_REMOVE_SUCCESS(index));
+      const updatedData = bookmarkStorage.remove(index);
+      bookmarkStore.dispatch(BOOKMARK_REMOVE_SUCCESS(updatedData));
     } catch (error) {
       bookmarkStore.dispatch(BOOKMARK_REMOVE_FAIL(error));
     }

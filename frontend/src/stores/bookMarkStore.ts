@@ -36,11 +36,10 @@ class BookMarkStore extends Store<IState> {
       bookmarkService.addBookmark(data);
     },
     [actions.ADD_SUCCESS]: ({ data }) => {
-      const mergedData = [...this.state.data, ...data];
       this.setState({
         ...this.state,
         add_status: ApiStatus.DONE,
-        data: mergedData,
+        data,
       });
     },
     [actions.ADD_FAIL]: ({ error }) => {
@@ -48,16 +47,13 @@ class BookMarkStore extends Store<IState> {
     },
     [actions.REMOVE_REQUEST]: ({ data }) => {
       this.setState({ ...this.state, remove_status: ApiStatus.LOADING });
-      bookmarkService.addBookmark(data);
+      bookmarkService.removeBookmark(data);
     },
     [actions.REMOVE_SUCCESS]: ({ data }) => {
-      const updatedData = this.state.data.filter(
-        (contents) => contents.idx !== data
-      );
       this.setState({
         ...this.state,
         remove_status: ApiStatus.DONE,
-        data: updatedData,
+        data,
       });
     },
     [actions.REMOVE_FAIL]: ({ error }) => {

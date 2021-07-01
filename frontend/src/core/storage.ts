@@ -1,5 +1,5 @@
 interface IDataBase {
-  id: string;
+  idx: number;
 }
 
 class storage<T extends IDataBase> {
@@ -14,14 +14,15 @@ class storage<T extends IDataBase> {
     this.storage.setItem(this.key, JSON.stringify(items));
   }
 
-  public has(id: string): boolean {
+  public has(idx: number): boolean {
     const datas = this.getAll();
-    return datas.findIndex((data) => data.id === id) !== -1;
+    console.log(datas);
+    return datas.findIndex((data) => data.idx === idx) !== -1;
   }
 
-  public get(id: string): T | null {
+  public get(idx: number): T | null {
     const datas = this.getAll();
-    const item = datas.find((data) => data.id === id);
+    const item = datas.find((data) => data.idx === idx);
     return item;
   }
 
@@ -32,9 +33,9 @@ class storage<T extends IDataBase> {
     return newData;
   }
 
-  public remove(id: string): T[] {
+  public remove(idx: number): T[] {
     const datas = this.getAll();
-    const newData = datas.filter((data) => data.id !== id);
+    const newData = datas.filter((data) => data.idx !== idx);
     this.set(newData);
     return newData;
   }
