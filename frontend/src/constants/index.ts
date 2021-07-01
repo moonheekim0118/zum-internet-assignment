@@ -20,4 +20,5 @@ export enum CategoryTitle {
   bookmark = "즐겨찾기",
 }
 
+export const TIMEOUT = 5000;
 export const SERVER_ERROR = new Error("Server Error!");
