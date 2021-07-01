@@ -97,9 +97,6 @@ class Component<IProps = unknown, IState = unknown> {
     this.props = nextProps;
     this.updateComponent();
   }
-
-  protected beforeChangeURL() {}
-  //   public pageInfo(): IPageInfo | void {}
 }
 
 export default Component;
