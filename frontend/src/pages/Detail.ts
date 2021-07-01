@@ -62,7 +62,11 @@ class Detail extends Component<{}, IState> {
       [ApiStatus.LOADING]: () => Loader(),
       [ApiStatus.DONE]: () => `
         <div class="detail-container">
-           ${data.contentsHTML}
+        ${data.contentsHTML}
+         <div class="buttons">
+          <button class="secondary-btn" id="list">
+            목록
+          </button>
             ${
               this.state.bookmark
                 ? `
