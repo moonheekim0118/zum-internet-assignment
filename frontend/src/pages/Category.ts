@@ -38,17 +38,17 @@ class Category extends Component<{}, IState> {
   protected render(): void {
     const { status, data } = this.useSelector();
     const renderByStatus = {
-      [ApiStatus.LOADING]: () =>
+      [ApiStatus.LOADING]: (): string =>
         data[this.state.category]?.contents
           ? `${CardList({
               contentsList: data[this.state.category].contents,
             })} ${Loader()}`
           : Loader(),
-      [ApiStatus.DONE]: () =>
+      [ApiStatus.DONE]: (): string =>
         CardList({
           contentsList: data[this.state.category]?.contents ?? [],
         }),
-      [ApiStatus.FAIL]: () => Error(),
+      [ApiStatus.FAIL]: (): string => Error(),
     };
 
     this.$container.innerHTML = `

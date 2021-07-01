@@ -59,8 +59,8 @@ class Detail extends Component<{}, IState> {
     const { status, data } = this.useSelector();
 
     const renderByStatus = {
-      [ApiStatus.LOADING]: () => Loader(),
-      [ApiStatus.DONE]: () => `
+      [ApiStatus.LOADING]: (): string => Loader(),
+      [ApiStatus.DONE]: (): string => `
         <div class="detail-container">
         ${data.contentsHTML}
          <div class="buttons">
@@ -81,7 +81,7 @@ class Detail extends Component<{}, IState> {
           </div>
         </div>
       `,
-      [ApiStatus.FAIL]: () => Error(),
+      [ApiStatus.FAIL]: (): string => Error(),
     };
     this.$container.innerHTML = status ? renderByStatus[status]() : "";
   }

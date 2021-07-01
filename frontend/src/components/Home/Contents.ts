@@ -22,8 +22,8 @@ class ContentsList extends Component {
   protected render(): void {
     const { data, status } = this.useSelector();
     const renderByStatus = {
-      [ApiStatus.LOADING]: () => Loader(),
-      [ApiStatus.DONE]: () => `
+      [ApiStatus.LOADING]: (): string => Loader(),
+      [ApiStatus.DONE]: (): string => `
       <div class="contents-detail" data-id="culture">
       <h4>#${CategoryTitle.culture}</h4>
        ${CardList({ contentsList: data.culture })}
@@ -41,7 +41,7 @@ class ContentsList extends Component {
         ${CardList({ contentsList: data.travel })}
       </div>
       `,
-      [ApiStatus.FAIL]: () => Error(),
+      [ApiStatus.FAIL]: (): string => Error(),
     };
     this.$container.innerHTML = status ? renderByStatus[status]() : "";
   }

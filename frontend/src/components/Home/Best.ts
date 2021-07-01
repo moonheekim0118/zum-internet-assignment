@@ -22,8 +22,8 @@ class Best extends Component {
     const { data, status } = this.useSelector();
 
     const renderByStatus = {
-      [ApiStatus.LOADING]: () => Loader(),
-      [ApiStatus.DONE]: () => ` 
+      [ApiStatus.LOADING]: (): string => Loader(),
+      [ApiStatus.DONE]: (): string => ` 
       <h3>실시간 TOP 12</h3>
       <ul>
       ${data
@@ -44,7 +44,7 @@ class Best extends Component {
         })
         .join("")}
         </ul>`,
-      [ApiStatus.FAIL]: () => Error(),
+      [ApiStatus.FAIL]: (): string => Error(),
     };
     this.$container.innerHTML = status ? renderByStatus[status]() : "";
   }

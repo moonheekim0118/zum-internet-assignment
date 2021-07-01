@@ -25,12 +25,7 @@ export enum Category {
   travel = "travel",
 }
 
-export interface IHubContents {
-  [Category.culture]: IContents[];
-  [Category.food]: IContents[];
-  [Category.life]: IContents[];
-  [Category.travel]: IContents[];
-}
+export type IHubContents = Record<Category, IContents[]>;
 
 export enum ApiStatus {
   LOADING = "LOADING",

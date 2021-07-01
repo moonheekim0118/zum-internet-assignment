@@ -22,8 +22,8 @@ class Bookmark extends Component {
     const { get_status, data } = this.useSelector();
 
     const renderByStatus = {
-      [ApiStatus.LOADING]: () => Loader(),
-      [ApiStatus.DONE]: () => {
+      [ApiStatus.LOADING]: (): string => Loader(),
+      [ApiStatus.DONE]: (): string => {
         return data.length === 0
           ? `<h3>아직 즐겨찾기가 없어요</h3>`
           : `${data.map(
@@ -41,7 +41,7 @@ class Bookmark extends Component {
         `
             )}`;
       },
-      [ApiStatus.FAIL]: () => Error(),
+      [ApiStatus.FAIL]: (): string => Error(),
     };
     this.$container.innerHTML = `
         <div class="bookmark-container">
