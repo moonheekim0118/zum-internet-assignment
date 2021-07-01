@@ -4,13 +4,13 @@ import { actions } from "@/actions/best";
 import { mainService } from "@/service";
 
 interface IState {
-  status: ApiStatus;
+  status: ApiStatus | null;
   data: IBest[] | null;
   error: string | null;
 }
 
 const initialState = {
-  status: ApiStatus.LOADING,
+  status: null,
   data: null,
   error: null,
 };
