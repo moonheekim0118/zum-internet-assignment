@@ -1,9 +1,5 @@
 import { IContents } from "@/types";
-export enum actions {
-  GET_REQUEST = "GET_REQUEST",
-  GET_SUCCESS = "GET_SUCCESS",
-  GET_FAIL = "GET_FAIL",
-}
+import actions from ".";
 
 export const SINGLE_CONTENT_REQUEST = (data) => {
   return { type: actions.GET_REQUEST, data };

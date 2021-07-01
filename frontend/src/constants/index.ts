@@ -12,8 +12,10 @@ export const frontURL = "http://localhost:9000";
 export const backURL = "http://localhost:3000/api";
 
 export enum CategoryTitle {
+  home = "홈",
   life = "생활",
   food = "음식",
   travel = "여행",
   culture = "문화",
+  bookmark = "즐겨찾기",
 }

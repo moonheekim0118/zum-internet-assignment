@@ -1,16 +1,4 @@
-export enum actions {
-  GET_REQUEST = "GET_REQUEST",
-  GET_SUCCESS = "GET_SUCCESS",
-  GET_FAIL = "GET_FAIL",
-
-  ADD_REQUEST = "ADD_REQUEST",
-  ADD_SUCCESS = "ADD_SUCCESS",
-  ADD_FAIL = "ADD_FAIL",
-
-  REMOVE_REQUEST = "REMOVE_REQUEST",
-  REMOVE_SUCCESS = "REMOVE_SUCCESS",
-  REMOVE_FAIL = "REMOVE_FAIL",
-}
+import actions from ".";
 
 export const BOOKMARK_REQUEST = () => {
   return { type: actions.GET_REQUEST };

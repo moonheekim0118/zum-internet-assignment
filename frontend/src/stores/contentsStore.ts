@@ -43,7 +43,7 @@ class ContentsStore extends Store<IState> {
         ...this.state,
         status: ApiStatus.LOADING,
       });
-      contentsService.getData(category, lastKey);
+      contentsService.getContents(category, lastKey);
     },
     [actions.GET_SUCCESS]: ({ data }) => {
       const { category, hasMore, lastKey, contents } = data;

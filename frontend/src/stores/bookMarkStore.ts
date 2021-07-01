@@ -1,8 +1,7 @@
-// api에서 데이터 가져올 때 파싱과정 한번 거쳐서 즐겨찾기에있는지 없는지확인!!
 import { Store } from "@/core";
 import { ApiStatus, IContents } from "@/types";
-import { actions } from "@/actions/bookmark";
 import { bookmarkService } from "@/service";
+import actions from "@/actions";
 
 interface IState {
   get_status: ApiStatus | null;
@@ -23,7 +22,7 @@ const initialState = {
 class BookMarkStore extends Store<IState> {
   protected reducer = {
     [actions.GET_REQUEST]: () => {
-      bookmarkService.getData();
+      bookmarkService.getBookmark();
     },
     [actions.GET_SUCCESS]: ({ data }) => {
       this.setState({ ...this.state, get_status: ApiStatus.DONE, data });

@@ -1,7 +1,7 @@
 import { Store } from "@/core";
 import { ApiStatus, IHubContents } from "@/types";
-import { actions } from "@/actions/hubContents";
 import { mainService } from "@/service";
+import actions from "@/actions";
 
 interface IState {
   status: ApiStatus | null;

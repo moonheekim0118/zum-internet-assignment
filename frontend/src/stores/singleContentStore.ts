@@ -1,7 +1,7 @@
 import { Store } from "@/core";
 import { ApiStatus, IContents } from "@/types";
-import { actions } from "@/actions/singleContent";
 import { singleContentService } from "@/service";
+import actions from "@/actions";
 
 interface IState {
   status: ApiStatus;
@@ -18,7 +18,7 @@ const initialState = {
 class SingleContentStore extends Store<IState> {
   protected reducer = {
     [actions.GET_REQUEST]: ({ data }) => {
-      singleContentService.getData(data);
+      singleContentService.getContent(data);
     },
     [actions.GET_SUCCESS]: ({ data }) => {
       this.setState({ ...this.state, status: ApiStatus.DONE, data });
