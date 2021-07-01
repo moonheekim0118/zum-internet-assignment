@@ -29,6 +29,12 @@ class Router<IPage> {
     );
   }
 
+  public back(): void {
+    const prevhref = history.state?.prevhref;
+    if (!prevhref) return;
+    this.push(prevhref);
+  }
+
   public push(href: string): void {
     const prevhref = "/" + this.pathList()[0];
     history.pushState({ href, prevhref }, null, href);

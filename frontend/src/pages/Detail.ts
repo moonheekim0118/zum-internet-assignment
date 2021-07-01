@@ -34,9 +34,7 @@ class Detail extends Component<{}, IState> {
       return;
 
     const assignAction = {
-      list: () => {
-        // 뒤로가기 구현
-      },
+      list: () => router.back(),
       addBookmark: () => {
         const { data } = this.useSelector();
         this.setState({ ...this.state, bookmark: true });
