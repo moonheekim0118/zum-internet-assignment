@@ -1,5 +1,5 @@
 import { Component, Router } from "@/core";
-import { Home, Category, Detail } from "@/pages";
+import { Home, Category, Detail, Bookmark } from "@/pages";
 
 import { PATH } from "@/constants";
 
@@ -13,7 +13,7 @@ const router = new Router<IPage>({
   [PATH.LIFE]: new Category(),
   [PATH.TRAVEL]: new Category(),
   [PATH.FOOD]: new Category(),
-  [PATH.BOOKMARK]: new Home(),
+  [PATH.BOOKMARK]: new Bookmark(),
   [PATH.DETAIL]: new Detail(),
 });
 
