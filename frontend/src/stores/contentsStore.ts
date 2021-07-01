@@ -34,18 +34,17 @@ const initialState = {
 
 class ContentsStore extends Store<IState> {
   protected reducer = {
-    [actions.GET_REQUEST]: ({ data: category }) => {
+    [actions.GET_REQUEST]: ({ data: category }): void => {
       const { status, data } = this.state;
       const { hasMore, lastKey } = data[category];
       if (!hasMore || status === ApiStatus.LOADING) return;
-
       this.setState({
         ...this.state,
         status: ApiStatus.LOADING,
       });
       contentsService.getContents(category, lastKey);
     },
-    [actions.GET_SUCCESS]: ({ data }) => {
+    [actions.GET_SUCCESS]: ({ data }): void => {
       const { category, hasMore, lastKey, contents } = data;
 
       const prevContents = this.state.data[category].contents;
@@ -60,7 +59,7 @@ class ContentsStore extends Store<IState> {
         data: { ...this.state.data, [category]: newData },
       });
     },
-    [actions.GET_FAIL]: ({ error }) => {
+    [actions.GET_FAIL]: ({ error }): void => {
       this.setState({ ...this.state, status: ApiStatus.FAIL, error });
     },
   };

@@ -43,3 +43,9 @@ export interface IContentsList {
   hasMore: boolean;
   lastKey: number;
 }
+
+export interface IAction<T = unknown> {
+  type: string;
+  data?: T;
+  error?: string;
+}

@@ -17,13 +17,13 @@ const initialState = {
 
 class BestStore extends Store<IState> {
   protected reducer = {
-    [actions.GET_REQUEST]: () => {
+    [actions.GET_REQUEST]: (): void => {
       mainService.getBestData();
     },
-    [actions.GET_SUCCESS]: ({ data }) => {
+    [actions.GET_SUCCESS]: ({ data }): void => {
       this.setState({ ...this.state, status: ApiStatus.DONE, data });
     },
-    [actions.GET_FAIL]: ({ error }) => {
+    [actions.GET_FAIL]: ({ error }): void => {
       this.setState({ ...this.state, status: ApiStatus.FAIL, error });
     },
   };

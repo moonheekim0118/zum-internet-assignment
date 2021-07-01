@@ -21,42 +21,42 @@ const initialState = {
 
 class BookMarkStore extends Store<IState> {
   protected reducer = {
-    [actions.GET_REQUEST]: () => {
+    [actions.GET_REQUEST]: (): void => {
       bookmarkService.getBookmark();
     },
-    [actions.GET_SUCCESS]: ({ data }) => {
+    [actions.GET_SUCCESS]: ({ data }): void => {
       this.setState({ ...this.state, get_status: ApiStatus.DONE, data });
     },
-    [actions.GET_FAIL]: ({ error }) => {
+    [actions.GET_FAIL]: ({ error }): void => {
       this.setState({ ...this.state, get_status: ApiStatus.FAIL, error });
     },
-    [actions.ADD_REQUEST]: ({ data }) => {
+    [actions.ADD_REQUEST]: ({ data }): void => {
       this.setState({ ...this.state, add_status: ApiStatus.LOADING });
       bookmarkService.addBookmark(data);
     },
-    [actions.ADD_SUCCESS]: ({ data }) => {
+    [actions.ADD_SUCCESS]: ({ data }): void => {
       this.setState({
         ...this.state,
         add_status: ApiStatus.DONE,
         data,
       });
     },
-    [actions.ADD_FAIL]: ({ error }) => {
-      this.setState({ ...this.state, add_status: ApiStatus.FAIL });
+    [actions.ADD_FAIL]: ({ error }): void => {
+      this.setState({ ...this.state, add_status: ApiStatus.FAIL, error });
     },
-    [actions.REMOVE_REQUEST]: ({ data }) => {
+    [actions.REMOVE_REQUEST]: ({ data }): void => {
       this.setState({ ...this.state, remove_status: ApiStatus.LOADING });
       bookmarkService.removeBookmark(data);
     },
-    [actions.REMOVE_SUCCESS]: ({ data }) => {
+    [actions.REMOVE_SUCCESS]: ({ data }): void => {
       this.setState({
         ...this.state,
         remove_status: ApiStatus.DONE,
         data,
       });
     },
-    [actions.REMOVE_FAIL]: ({ error }) => {
-      this.setState({ ...this.state, remove_status: ApiStatus.FAIL });
+    [actions.REMOVE_FAIL]: ({ error }): void => {
+      this.setState({ ...this.state, remove_status: ApiStatus.FAIL, error });
     },
   };
 }

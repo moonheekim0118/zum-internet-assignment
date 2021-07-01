@@ -8,9 +8,10 @@ import {
   REMOVE_BOOKMARK_SUCCESS,
   REMOVE_BOOKMARK_FAIL,
 } from "@/actions/bookmark";
+import { IContents } from "@/types";
 
 const bookmarkService = {
-  getBookmark: () => {
+  getBookmark: (): void => {
     try {
       const data = bookmarkStorage.get();
       bookmarkStore.dispatch(GET_BOOKMARK_SUCCESS(data));
@@ -18,7 +19,7 @@ const bookmarkService = {
       bookmarkStore.dispatch(GET_BOOKMARK_FAIL(error));
     }
   },
-  addBookmark: (data) => {
+  addBookmark: (data: IContents): void => {
     try {
       const updatedData = [data, ...bookmarkStorage.get()];
       bookmarkStorage.set(updatedData);
@@ -28,11 +29,11 @@ const bookmarkService = {
     }
   },
 
-  removeBookmark: (index) => {
+  removeBookmark: (index: string): void => {
     try {
       const updatedData = bookmarkStorage
         .get()
-        .filter((data) => data.idx !== index);
+        .filter((data) => data.idx !== +index);
       bookmarkStorage.set(updatedData);
       bookmarkStore.dispatch(REMOVE_BOOKMARK_SUCCESS(updatedData));
     } catch (error) {

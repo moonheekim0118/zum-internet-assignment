@@ -13,7 +13,7 @@ const request = async (endPoint, option = {}) => {
 const api = {
   getBest: () => request("/best"),
   getSummaryContents: () => request("/content"),
-  getInfiniteContents: async (category: Category, lastKey: number | string) => {
+  getInfiniteContents: async (category: Category, lastKey: number) => {
     const data = await request(`/content/${category}/${lastKey}`);
     return { ...data, category };
   },

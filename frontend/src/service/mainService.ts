@@ -7,21 +7,21 @@ import { GET_BEST_SUCCESS, GET_BEST_FAIL } from "@/actions/best";
 import { hubContentsStore, bestStore } from "@/stores";
 
 const mainService = {
-  getContentsData: async () => {
+  getContentsData: async (): Promise<void> => {
     try {
       const data = await api.getSummaryContents();
-      return hubContentsStore.dispatch(GET_HUBCONTENTS_SUCCESS(data));
+      hubContentsStore.dispatch(GET_HUBCONTENTS_SUCCESS(data));
     } catch (error) {
-      return hubContentsStore.dispatch(GET_HUBCONTENTS_FAIL(error));
+      hubContentsStore.dispatch(GET_HUBCONTENTS_FAIL(error));
     }
   },
 
-  getBestData: async () => {
+  getBestData: async (): Promise<void> => {
     try {
       const data = await api.getBest();
-      return bestStore.dispatch(GET_BEST_SUCCESS(data));
+      bestStore.dispatch(GET_BEST_SUCCESS(data));
     } catch (error) {
-      return bestStore.dispatch(GET_BEST_FAIL(error));
+      bestStore.dispatch(GET_BEST_FAIL(error));
     }
   },
 };
