@@ -7,7 +7,7 @@ module.exports = {
     compress: true,
     port: 9000,
     historyApiFallback: {
-      index: path.resolve(__dirname, "public/index.html"),
+      index: "public/index.html",
     },
   },
   devtool: "inline-source-map",
