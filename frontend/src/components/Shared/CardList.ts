@@ -15,7 +15,7 @@ function CardList({ contentsList }: IProps): string {
             return `
             <article class="contents-card" data-index=${idx}>
                 <a href="${PATH.DETAIL}/${idx}">
-                    <img src="${imageUrl}"/>
+                    <img src="${imageUrl}" loading="lazy"/>
                     <h3>${title}</h3>
                     <span class="summary">
                         ${summaryContent}
