@@ -1,7 +1,10 @@
 import express from "express";
 import crawlContetnsHTML from "../crawler";
+import cache from "../cache";
 import { bestData, contentsData } from "../data";
 import { INIT_CONTENTS, INFINITE_CONTENTS } from "../constant";
+
+const dataCache = new cache();
 
 interface Object{
   [key: string] : unknown;
@@ -29,10 +32,15 @@ export const best = async (req: express.Request, res: express.Response) => {
 // 상위 4개 보여주는 api
 export const contents = async (req: express.Request, res: express.Response) => {
   try {
-    const contents = {} as Object;
-    for(let key in contentsData){
-      contents[key]=contentsData[key as Category].slice(0, INIT_CONTENTS);
-    } 
+    let contents = {} as Object;
+    if(dataCache.has('/hubContents')){
+      contents = dataCache.get("/hubContents") as Object;
+    } else {
+      for(let key in contentsData){
+        contents[key]=contentsData[key as Category].slice(0, INIT_CONTENTS);
+      } 
+      dataCache.set("/hubContents", contents);
+    }
     if (!contents) throw new Error("Not Found Category");
     return res.status(200).json(contents);
   } catch (error) {
@@ -49,14 +57,22 @@ export const contentsDetail = async(req: express.Request,
   res: express.Response)=>{
     try{
       const idx= +req.params.idx;
-      let contents = null;
-      for(let category in contentsData) {
-        contents = contentsData[category as Category].find((content)=>content.idx ===idx);
-        if(contents) break;
-      }
-      if(!contents) throw new Error("Not Found data");
-      const contentsHTML = await crawlContetnsHTML(contents.url);
-      return res.status(200).json({contents, contentsHTML});
+      let data = null;
+      if(dataCache.has(`/detail/${idx}`)){
+        data = dataCache.get(`/detail/${idx}`)
+      } else {
+        let contents = null;
+        for(let category in contentsData) {
+          contents = contentsData[category as Category].find((content)=>content.idx ===idx);
+          if(contents) break;
+        }
+        if(!contents) throw new Error("Not Found data");
+        const contentsHTML = await crawlContetnsHTML(contents.url);
+        data = { contents, contentsHTML};
+        dataCache.set(`/detail/${idx}`, data);
+      };
+
+      return res.status(200).json(data);
     }catch(error){
       console.error(error.stack);
       return res
