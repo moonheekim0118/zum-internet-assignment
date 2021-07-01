@@ -1,4 +1,6 @@
 import { IContents, Category } from "@/types";
+import { isBookMarked } from "@/storage";
+import { StarIcon } from "@/components/Shared";
 
 interface IProps {
   category: Category;
@@ -18,7 +20,14 @@ function CardList({ category, contentsList }: IProps): string {
                     <span class="summary">
                         ${summaryContent}
                     </span>
-                    <span class="author">${mediaName}</span>
+                    <div class="lower-container">
+                      <span class="author">${mediaName}</span>
+                      ${
+                        isBookMarked(idx)
+                          ? StarIcon({ theme: "primary" })
+                          : StarIcon({ theme: "secondary" })
+                      }
+                    </div>
                 </a>
            </article>
             `;

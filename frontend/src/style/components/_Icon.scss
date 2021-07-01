@@ -1,0 +1,13 @@
+.star-svg {
+  path {
+    fill: #fff;
+  }
+}
+
+.star-svg.primary {
+  background-color: yellow;
+}
+
+.star-svg.secondary {
+  background-color: var(--color-dark-gray);
+}
