@@ -34,7 +34,6 @@ class Component<IProps = unknown, IState = unknown> {
   protected setUp(): void {
     this.initDom();
     this.initChildren();
-    this.render();
     storeObserve(
       () => this.useSelector(),
       () => this.updateComponent()
