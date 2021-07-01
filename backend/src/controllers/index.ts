@@ -2,7 +2,7 @@ import express from "express";
 import crawlContetnsHTML from "../crawler";
 import cache from "../cache";
 import { bestData, contentsData } from "../data";
-import { INIT_CONTENTS, INFINITE_CONTENTS } from "../constant";
+import { INIT_CONTENTS, INFINITE_CONTENTS, INTERNAL_ERROR,  NOT_FOUND_ERROR} from "../constant";
 
 const dataCache = new cache();
 
@@ -17,14 +17,13 @@ enum Category {
   travel = "travel",
 }
 
+
 export const best = async (req: express.Request, res: express.Response) => {
   try {
     return res.status(200).json(bestData);
   } catch (error) {
     console.error(error.stack);
-    return res
-      .status(500)
-      .send({ status: 500, message: error.message ?? "internal Error" });
+    return res.status(500).send({ message: error.message ?? INTERNAL_ERROR});
   }
 };
 
@@ -41,13 +40,11 @@ export const contents = async (req: express.Request, res: express.Response) => {
       } 
       dataCache.set("/hubContents", contents);
     }
-    if (!contents) throw new Error("Not Found Category");
+    if (!contents) throw NOT_FOUND_ERROR;
     return res.status(200).json(contents);
   } catch (error) {
     console.error(error.stack);
-    return res
-      .status(500)
-      .send({ status: 500, message: error.message ?? "internal Error" });
+    return res.status(500).send({ message: error.message ?? INTERNAL_ERROR});
   }
 };
 
@@ -66,7 +63,7 @@ export const contentsDetail = async(req: express.Request,
           contents = contentsData[category as Category].find((content)=>content.idx ===idx);
           if(contents) break;
         }
-        if(!contents) throw new Error("Not Found data");
+        if(!contents) throw NOT_FOUND_ERROR;
         const contentsHTML = await crawlContetnsHTML(contents.url);
         data = { contents, contentsHTML};
         dataCache.set(`/detail/${idx}`, data);
@@ -75,9 +72,7 @@ export const contentsDetail = async(req: express.Request,
       return res.status(200).json(data);
     }catch(error){
       console.error(error.stack);
-      return res
-        .status(500)
-        .send({ status: 500, message: error.message ?? "internal Error" });
+      return res.status(500).send({ message: error.message ?? INTERNAL_ERROR});
     }
 
 }
@@ -85,14 +80,14 @@ export const contentsDetail = async(req: express.Request,
 // 해당 카테고리 무한 스크롤
 export const contentsInfinite = async (
   req: express.Request,
-  res: express.Response
+  res: express.Response,
 ) => {
   try {
     const category = req.params.category as Category;
     const lastKey = +req.params.idx;
 
     const contents = contentsData[category];
-    if (!contents) throw new Error("Not Found Category");
+    if (!contents) throw NOT_FOUND_ERROR;
     const index = contents.findIndex((content) => content.idx === lastKey);
 
     const parsedData = contents.slice(index + 1, index + INFINITE_CONTENTS + 1);
@@ -101,8 +96,6 @@ export const contentsInfinite = async (
     return res.status(200).json({contents:parsedData, hasMore, lastKey:parsedData[size-1].idx });
   } catch (error) {
     console.error(error.stack);
-    return res
-      .status(500)
-      .send({ status: 500, message: error.message ?? "internal Error" });
+    return res.status(500).send({ message: error.message ?? INTERNAL_ERROR});
   }
 };
