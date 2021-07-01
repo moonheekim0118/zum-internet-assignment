@@ -54,7 +54,9 @@ class Category extends Component<{}, IState> {
     this.$container.innerHTML = `
       ${status ? renderByStatus[status]() : ""}
     `;
-    this.$container.appendChild(this.$observer);
+    if (status !== ApiStatus.FAIL) {
+      this.$container.appendChild(this.$observer);
+    }
   }
 }
 

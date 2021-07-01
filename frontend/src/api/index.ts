@@ -1,12 +1,16 @@
 import { Category } from "@/types";
-import { backURL } from "@/constants";
+import { backURL, SERVER_ERROR } from "@/constants";
 
 const request = async (endPoint, option = {}) => {
   const response = await fetch(backURL + endPoint, option);
   const data = await response.json();
+  const timer = setTimeout(() => {
+    throw SERVER_ERROR;
+  }, 5000);
   if (!response.ok) {
-    throw new Error("Server Error");
+    throw SERVER_ERROR;
   }
+  clearTimeout(timer);
   return data;
 };
 

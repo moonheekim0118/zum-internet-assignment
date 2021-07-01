@@ -19,3 +19,5 @@ export enum CategoryTitle {
   culture = "문화",
   bookmark = "즐겨찾기",
 }
+
+export const SERVER_ERROR = new Error("Server Error!");
