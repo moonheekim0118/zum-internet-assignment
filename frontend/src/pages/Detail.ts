@@ -1,10 +1,10 @@
 import { Component } from "@/core";
 import { newElement } from "@/utils/dom";
 import { singleContentStore, bookmarkStore } from "@/stores";
-import { SINGLE_CONTENT_REQUEST } from "@/actions/singleContent";
+import { GET_CONTENT_REQUEST } from "@/actions/singleContent";
 import {
-  BOOKMARK_ADD_REQUEST,
-  BOOKMARK_REMOVE_REQUEST,
+  ADD_BOOKMARK_REQUEST,
+  REMOVE_BOOKMARK_REQUEST,
 } from "@/actions/bookmark";
 import { Loader, Error } from "@/components/Shared";
 import { ApiStatus } from "@/types";
@@ -38,12 +38,12 @@ class Detail extends Component<{}, IState> {
       addBookmark: () => {
         const { data } = this.useSelector();
         this.setState({ ...this.state, bookmark: true });
-        bookmarkStore.dispatch(BOOKMARK_ADD_REQUEST(data));
+        bookmarkStore.dispatch(ADD_BOOKMARK_REQUEST(data));
       },
       removeBookmark: () => {
         const { data } = this.useSelector();
         this.setState({ ...this.state, bookmark: false });
-        bookmarkStore.dispatch(BOOKMARK_REMOVE_REQUEST(data.idx));
+        bookmarkStore.dispatch(REMOVE_BOOKMARK_REQUEST(data.idx));
       },
     };
     assignAction[id]();
@@ -53,7 +53,7 @@ class Detail extends Component<{}, IState> {
     const [_, index] = router.pathList();
     const bookmark = isBookMarked(+index);
     this.setState({ index, bookmark });
-    singleContentStore.dispatch(SINGLE_CONTENT_REQUEST({ index }));
+    singleContentStore.dispatch(GET_CONTENT_REQUEST({ index }));
   }
 
   protected render(): void {

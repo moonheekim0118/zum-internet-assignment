@@ -3,7 +3,7 @@ import { newElement } from "@/utils/dom";
 import { CategoryTitle } from "@/constants";
 import { CardList, Loader, Error } from "@/components/Shared";
 import { ApiStatus } from "@/types";
-import { HUBCONTENTS_REQUEST } from "@/actions/hubContents";
+import { GET_HUBCONTENTS_REQUEST } from "@/actions/hubContents";
 import { hubContentsStore } from "@/stores";
 
 class ContentsList extends Component {
@@ -16,7 +16,7 @@ class ContentsList extends Component {
   }
 
   protected componentWillMount(): void {
-    hubContentsStore.dispatch(HUBCONTENTS_REQUEST());
+    hubContentsStore.dispatch(GET_HUBCONTENTS_REQUEST());
   }
 
   protected render(): void {

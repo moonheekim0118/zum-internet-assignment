@@ -4,7 +4,7 @@ import { bookmarkStore } from "@/stores";
 import { Loader, Error } from "@/components/Shared";
 import { ApiStatus } from "@/types";
 import { PATH } from "@/constants";
-import { BOOKMARK_REQUEST } from "@/actions/bookmark";
+import { GET_BOOKMARK_REQUEST } from "@/actions/bookmark";
 
 class Bookmark extends Component {
   protected useSelector() {
@@ -15,7 +15,7 @@ class Bookmark extends Component {
   }
 
   protected componentWillMount(): void {
-    bookmarkStore.dispatch(BOOKMARK_REQUEST());
+    bookmarkStore.dispatch(GET_BOOKMARK_REQUEST());
   }
 
   protected render(): void {

@@ -1,6 +1,6 @@
 import { Component, IntersectionObserver } from "@/core";
 import { newElement } from "@/utils/dom";
-import { CONTENTS_REQUEST } from "@/actions/contents";
+import { GET_CONTENTS_REQUEST } from "@/actions/contents";
 import { contentsStore } from "@/stores";
 import { CardList, Loader, Error } from "@/components/Shared";
 import { Category as CategoryType, ApiStatus } from "@/types";
@@ -21,7 +21,7 @@ class Category extends Component<{}, IState> {
   }
 
   private handleGetMoreData(): void {
-    contentsStore.dispatch(CONTENTS_REQUEST(this.state.category));
+    contentsStore.dispatch(GET_CONTENTS_REQUEST(this.state.category));
   }
 
   protected componentWillMount(): void {

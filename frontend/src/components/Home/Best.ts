@@ -3,7 +3,7 @@ import { newElement } from "@/utils/dom";
 import { ApiStatus } from "@/types";
 import { Loader, Error } from "@/components/Shared";
 import { bestStore } from "@/stores";
-import { BEST_REQUEST } from "@/actions/best";
+import { GET_BEST_REQUEST } from "@/actions/best";
 
 class Best extends Component {
   protected useSelector() {
@@ -15,7 +15,7 @@ class Best extends Component {
   }
 
   protected componentWillMount(): void {
-    bestStore.dispatch(BEST_REQUEST());
+    bestStore.dispatch(GET_BEST_REQUEST());
   }
 
   protected render(): void {
