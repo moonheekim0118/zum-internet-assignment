@@ -1,4 +1,4 @@
-import { $ } from "@/utils/dom";
+import { $, closest } from "@/utils/dom";
 
 class Router<IPage> {
   constructor(readonly pages: IPage) {
@@ -12,7 +12,10 @@ class Router<IPage> {
   }
 
   public pathname(): string {
-    return window.location.href.replace("http://localhost:9000", "");
+    return (
+      history.state?.href ??
+      window.location.href.replace("http://localhost:9000", "")
+    );
   }
 
   public push(href: string): void {
@@ -22,6 +25,16 @@ class Router<IPage> {
   }
 
   private bindEvents(): void {
+    window.addEventListener("click", (e: Event) => {
+      e.preventDefault();
+      const target = e.target as HTMLElement;
+      const anchor = closest(target, "a") as HTMLAnchorElement;
+      if (!anchor) return;
+
+      const link = anchor.href.replace("http://localhost:9000", "");
+      this.push(link);
+    });
+
     window.addEventListener("popstate", () => this.render());
   }
 

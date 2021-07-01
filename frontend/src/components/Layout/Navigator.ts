@@ -1,12 +1,18 @@
 import { Component } from "@/core";
-import { newElement } from "@/utils/dom";
+import { newElement, closest } from "@/utils/dom";
 import { PATH } from "@/constants";
 import router from "@/router";
 
 class Navigator extends Component {
   constructor() {
     super();
-    window.addEventListener("hashchange", () => this.render());
+    window.addEventListener("click", (e: Event) => {
+      e.preventDefault();
+      const target = e.target as HTMLElement;
+      const anchor = closest(target, "a") as HTMLAnchorElement;
+      if (!anchor) return;
+      this.render();
+    });
   }
   protected initDom(): void {
     this.$container = newElement(`<nav/>`);
