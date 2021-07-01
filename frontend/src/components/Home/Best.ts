@@ -1,6 +1,6 @@
 import { Component } from "@/core";
 import { newElement } from "@/utils/dom";
-import { ApiStatus, IBest } from "@/types";
+import { ApiStatus } from "@/types";
 import { Loader, Error } from "@/components/Shared";
 import { bestStore } from "@/stores";
 import { BEST_REQUEST } from "@/actions/best";

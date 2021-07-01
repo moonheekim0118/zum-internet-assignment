@@ -1,9 +1,8 @@
-import { Category, IHubContents, IBest } from "@/types";
-
-const baseUrl = "http://localhost:3000/api";
+import { Category } from "@/types";
+import { backURL } from "@/constants";
 
 const request = async (endPoint, option = {}) => {
-  const response = await fetch(baseUrl + endPoint, option);
+  const response = await fetch(backURL + endPoint, option);
   const data = await response.json();
   if (!response.ok) {
     throw new Error("Server Error");

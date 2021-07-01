@@ -1,4 +1,5 @@
 import { $, closest } from "@/utils/dom";
+import { frontURL } from "@/constants";
 
 let currentObserver = null;
 
@@ -23,10 +24,7 @@ class Router<IPage> {
 
   public pathname(): string {
     if (currentObserver) this.observers.add(currentObserver);
-    return (
-      history.state?.href ??
-      window.location.href.replace("http://localhost:9000", "")
-    );
+    return history.state?.href ?? window.location.href.replace(frontURL, "");
   }
 
   public back(): void {
@@ -48,7 +46,7 @@ class Router<IPage> {
       const anchor = closest(target, "a") as HTMLAnchorElement;
       if (!anchor) return;
 
-      const link = anchor.href.replace("http://localhost:9000", "");
+      const link = anchor.href.replace(frontURL, "");
       this.push(link);
     });
 
