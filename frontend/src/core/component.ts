@@ -22,7 +22,6 @@ class Component<IProps = unknown, IState = unknown> {
   protected bindEvents(): void {}
   protected initDom(): void {}
   protected initChildren(): void {}
-  protected initState(): void {}
   protected componentWillMount(): void {}
   protected componentWillUpdate(): void {}
   protected render(): void {}
@@ -48,7 +47,6 @@ class Component<IProps = unknown, IState = unknown> {
     this.componentWillMount();
     this.render();
     this.bindEvents();
-    this.initState();
     this.children.forEach((child) => {
       this.$container.appendChild(child.mount());
     });
@@ -89,11 +87,6 @@ class Component<IProps = unknown, IState = unknown> {
 
   public setState(nextState: IState): void {
     this.state = nextState;
-    this.updateComponent();
-  }
-
-  public updateProps(nextProps: IProps): void {
-    this.props = nextProps;
     this.updateComponent();
   }
 }
