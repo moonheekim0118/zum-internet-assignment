@@ -13,7 +13,6 @@ import router from "@/router";
 
 interface IState {
   index: string;
-  category: string;
   bookmark: boolean;
 }
 
@@ -53,10 +52,10 @@ class Detail extends Component<{}, IState> {
   }
 
   protected componentWillMount(): void {
-    const [_, category, index] = router.pathList();
+    const [_, index] = router.pathList();
     const bookmark = isBookMarked(+index);
-    this.setState({ category, index, bookmark });
-    singleContentStore.dispatch(SINGLE_CONTENT_REQUEST({ category, index }));
+    this.setState({ index, bookmark });
+    singleContentStore.dispatch(SINGLE_CONTENT_REQUEST({ index }));
   }
 
   protected render(): void {

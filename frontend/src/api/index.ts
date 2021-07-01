@@ -19,8 +19,7 @@ const api = {
     return { ...data, category };
   },
 
-  getDetailContent: (category: string, index: string) =>
-    request(`/detail/${category}/${index}`),
+  getDetailContent: (index: string) => request(`/detail/${index}`),
 };
 
 export default api;

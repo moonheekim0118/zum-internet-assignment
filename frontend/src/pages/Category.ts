@@ -41,13 +41,11 @@ class Category extends Component<{}, IState> {
       [ApiStatus.LOADING]: () =>
         data[this.state.category]?.contents
           ? `${CardList({
-              category: this.state.category,
               contentsList: data[this.state.category].contents,
             })} ${Loader()}`
           : Loader(),
       [ApiStatus.DONE]: () =>
         CardList({
-          category: this.state.category,
           contentsList: data[this.state.category]?.contents ?? [],
         }),
       [ApiStatus.FAIL]: () => Error(),

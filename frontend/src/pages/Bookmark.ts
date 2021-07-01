@@ -28,12 +28,14 @@ class Bookmark extends Component {
           : `${data.map(
               ({ idx, title, imageUrl, mediaName, summaryContent }) => `
           <article class="bookmark" data-id=${idx}>
+            <a href="#detail/${idx}">
             <img src="${imageUrl}"/>
             <div class="bookmark-detail">
               <h3>${title}</h3>
               <span class="author">${mediaName}</span>
               <span class="full-contents">${summaryContent}</span>
             </div>
+            </a>
           </article>
         `
             )}`;

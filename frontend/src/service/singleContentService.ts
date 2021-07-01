@@ -6,9 +6,9 @@ import {
 import api from "@/api";
 
 const singleContentService = {
-  getData: async ({ category, index }) => {
+  getData: async ({ index }) => {
     try {
-      const data = await api.getDetailContent(category, index);
+      const data = await api.getDetailContent(index);
       return singleContentStore.dispatch(SINGLE_CONTENT_SUCCESS(data));
     } catch (error) {
       return singleContentStore.dispatch(SINGLE_CONTENT_FAIL(error));

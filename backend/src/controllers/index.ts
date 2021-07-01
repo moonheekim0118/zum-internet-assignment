@@ -47,8 +47,12 @@ export const contents = async (req: express.Request, res: express.Response) => {
 export const contentsDetail = async(req: express.Request,
   res: express.Response)=>{
     try{
-      const { category , idx} = req.params;
-      const contents = contentsData[category as Category].find((content)=>content.idx===+idx);
+      const idx= +req.params.idx;
+      let contents = null;
+      for(let category in contentsData) {
+        contents = contentsData[category as Category].find((content)=>content.idx ===idx);
+        if(contents) break;
+      }
       if(!contents) throw new Error("Not Found data");
       return res.status(200).json(contents);
     }catch(error){
