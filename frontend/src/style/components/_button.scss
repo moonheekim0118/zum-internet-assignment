@@ -1,9 +1,0 @@
-@import "../abstracts/mixins";
-
-.primary-btn {
-  @include button(var(--color-dark-blue), var(--color-white));
-}
-
-.secondary-btn {
-  @include button(var(--color-white), var(--color-dark-blue));
-}

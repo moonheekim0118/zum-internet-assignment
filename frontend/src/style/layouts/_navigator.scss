@@ -1,8 +1,0 @@
-@import "../abstracts/mixins";
-
-nav {
-  @include flex-row-column-between;
-  width: 100%;
-  align-items: center;
-  border-top: 1px solid var(--color-light-gray);
-}
