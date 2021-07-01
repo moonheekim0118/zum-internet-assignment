@@ -10,7 +10,7 @@ import {
 } from "@/actions/bookmark";
 
 const bookmarkService = {
-  getData: () => {
+  getBookmark: () => {
     try {
       const data = bookmarkStorage.get();
       bookmarkStore.dispatch(BOOKMARK_SUCCESS(data));

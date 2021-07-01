@@ -6,7 +6,7 @@ import {
 import api from "@/api";
 
 const singleContentService = {
-  getData: async ({ index }) => {
+  getContent: async ({ index }) => {
     try {
       const data = await api.getDetailContent(index);
       return singleContentStore.dispatch(SINGLE_CONTENT_SUCCESS(data));
