@@ -1,12 +1,14 @@
+@import "../abstracts/mixins";
+
 .bookmark-container {
-  display: flex;
-  flex-direction: column;
+  @include flex-colum;
 
   .bookmark {
     border: 1px solid var(--color-light-gray);
     border-radius: 15px;
     margin-bottom: var(--space-lg);
     transition: 0.5s ease;
+
     a {
       width: 100%;
       height: 100%;
@@ -15,8 +17,7 @@
     }
 
     .bookmark-detail {
-      display: flex;
-      flex-direction: column;
+      @include flex-colum;
       margin-left: var(--space-lg);
     }
 

@@ -1,7 +1,7 @@
+@import "../abstracts/mixins";
+
 .detail-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  @include flex-column-center;
   padding: 0 var(--space-xl);
 
   img {

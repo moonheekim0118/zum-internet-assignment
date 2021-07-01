@@ -1,3 +1,5 @@
+@import "../abstracts/mixins";
+
 .best-container {
   padding: var(--space-lg) 0;
 
@@ -6,10 +8,9 @@
   }
 
   ul {
+    @include grid-column-center;
     width: 100%;
     padding: var(--space-lg) 0;
-    display: grid;
-    justify-content: center;
     grid-template-columns: repeat(auto-fit, 300px);
     gap: var(--space-xxxxs);
 
@@ -39,10 +40,8 @@
         }
 
         .detail {
+          @include flex-column-center;
           height: 100%;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
           margin-left: var(--space-md);
 
           strong {

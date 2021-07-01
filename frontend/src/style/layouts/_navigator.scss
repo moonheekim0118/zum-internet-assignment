@@ -1,8 +1,8 @@
-nav {
-  border-top: 1px solid var(--color-light-gray);
+@import "../abstracts/mixins";
 
+nav {
+  @include flex-row-column-between;
   width: 100%;
-  display: flex;
   align-items: center;
-  justify-content: space-between;
+  border-top: 1px solid var(--color-light-gray);
 }

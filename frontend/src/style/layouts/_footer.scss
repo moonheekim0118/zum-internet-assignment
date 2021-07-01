@@ -1,6 +1,7 @@
+@import "../abstracts/mixins";
+
 footer {
-  display: grid;
-  place-items: center;
+  @include grid-center;
   border-top: 1px solid var(--color-light-gray);
   padding: var(--space-lg);
 
