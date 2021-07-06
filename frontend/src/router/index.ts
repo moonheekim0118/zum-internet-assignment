@@ -3,9 +3,7 @@ import { Home, Category, Detail, Bookmark } from "@/pages";
 
 import { PATH } from "@/constants";
 
-type IPage = {
-  [pathname in PATH]: Component;
-};
+type IPage = Record<PATH, Component>;
 
 const router = new Router<IPage>({
   [PATH.HOME]: new Home(),
