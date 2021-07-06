@@ -5,9 +5,7 @@ const controller = new AbortController();
 const signal = controller.signal;
 
 const request = async (endPoint: string, time: number) => {
-  const timer = setTimeout(() => {
-    controller.abort();
-  }, time);
+  const timer = setTimeout(() => controller.abort(), time);
   const response = await fetch(backURL + endPoint, { signal });
   const data = await response.json();
   if (!response.ok) {
@@ -24,7 +22,6 @@ const api = {
     const data = await request(`/content/${category}/${lastKey}`, TIMEOUT);
     return { ...data, category };
   },
-
   getDetailContent: (index: string) => request(`/detail/${index}`, TIMEOUT),
 };
 
