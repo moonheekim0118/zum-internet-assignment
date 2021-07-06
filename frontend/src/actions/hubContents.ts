@@ -11,6 +11,6 @@ export const GET_HUBCONTENTS_SUCCESS = (
   return { type: actions.GET_SUCCESS, data };
 };
 
-export const GET_HUBCONTENTS_FAIL = (error: string) => {
+export const GET_HUBCONTENTS_FAIL = (error: string): IAction => {
   return { type: actions.GET_FAIL, error };
 };

@@ -12,6 +12,6 @@ export const GET_CONTENT_SUCCESS = (data: IContents): IAction<IContents> => {
   return { type: actions.GET_SUCCESS, data };
 };
 
-export const GET_CONTENT_FAIL = (error: string) => {
+export const GET_CONTENT_FAIL = (error: string): IAction => {
   return { type: actions.GET_FAIL, error };
 };
