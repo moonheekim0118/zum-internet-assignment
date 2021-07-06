@@ -69,7 +69,6 @@ class Router<IPage> {
       $main.appendChild(this.pages[href].mount());
     }
     this.observers.forEach((observer) => observer());
-    // TODO: NOT FOUND
   }
 }
 

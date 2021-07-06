@@ -44,9 +44,9 @@ class Bookmark extends Component {
       [ApiStatus.FAIL]: (): string => Error(),
     };
     this.$container.innerHTML = `
-        <div class="bookmark-container">
-           ${get_status ? renderByStatus[get_status]() : ""}
-        </div>
+      <div class="bookmark-container">
+        ${get_status ? renderByStatus[get_status]() : ""}
+      </div>
       `;
   }
 }
