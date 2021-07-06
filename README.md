@@ -11,7 +11,7 @@
 
 1. **setUp**
 
-- `initDome` 해당 컴포넌트의 Container 가 될 Element를 등록한다.
+- `initDom` 해당 컴포넌트의 Container 가 될 Element를 등록한다.
 - `initChildren`자식 컴포넌트를 등록한다.
 - `storeObserver`useSelector -> useSelector에서 특정 스토어의 데이터가 쓰이는지 확인, 쓰인다면 해당 컴포넌트를 스토어의 옵저버로 등록하고, 스토어의 상태값이 변할때마다 updateComponent 메서드를 실행한다.
 - `routerObserver`usePathName -> usePathname에서 라우팅의 pathname이 참조되는지 확인 , 참조된다면 해당 컴포넌트를 라우터의 옵저버로 등록하고, pathname이 변경될 때 마다 render 메서드 실행하여 리렌더링한다.
