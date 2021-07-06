@@ -18,38 +18,38 @@ class Navigator extends Component {
   protected render(): void {
     this.$container.innerHTML = `
         <ul class="menu-container">
-            <li class=${
-              this.checkPath(PATH.HOME) ? "visiting" : ""
-            }><a data-id="home" href="${PATH.HOME}">${
-      CategoryTitle.home
-    }</a></li>
-            <li class=${
-              this.checkPath(PATH.LIFE) ? "visiting" : ""
-            }><a data-id="life" href="${PATH.LIFE}">${
-      CategoryTitle.life
-    }</a></li>
-            <li class=${
-              this.checkPath(PATH.FOOD) ? "visiting" : ""
-            }><a data-id="food" href="${PATH.FOOD}">${
-      CategoryTitle.food
-    }</a></li>
-            <li class=${
-              this.checkPath(PATH.TRAVEL) ? "visiting" : ""
-            }><a data-id="travel" href="${PATH.TRAVEL}">${
-      CategoryTitle.travel
-    }</a></li>
-            <li class=${
-              this.checkPath(PATH.CULTURE) ? "visiting" : ""
-            }><a data-id="culture" href="${PATH.CULTURE}">${
-      CategoryTitle.culture
-    }</a></li>
+          <li class=${this.checkPath(PATH.HOME) ? "visiting" : ""}>
+            <a data-id="home" href="${PATH.HOME}">
+              ${CategoryTitle.home}
+            </a>
+          </li>
+          <li class=${this.checkPath(PATH.LIFE) ? "visiting" : ""}>
+            <a data-id="life" href="${PATH.LIFE}">
+              ${CategoryTitle.life}
+            </a>
+          </li>
+          <li class=${this.checkPath(PATH.FOOD) ? "visiting" : ""}>
+            <a data-id="food" href="${PATH.FOOD}">
+              ${CategoryTitle.food}
+            </a>
+          </li>
+          <li class=${this.checkPath(PATH.TRAVEL) ? "visiting" : ""}>
+            <a data-id="travel" href="${PATH.TRAVEL}">
+              ${CategoryTitle.travel}
+            </a>
+          </li>
+          <li class=${this.checkPath(PATH.CULTURE) ? "visiting" : ""}>
+            <a data-id="culture" href="${PATH.CULTURE}">
+              ${CategoryTitle.culture}
+            </a>
+          </li>
         </ul>
         <ul class="menu-container">
-            <li class=${this.checkPath(PATH.BOOKMARK) ? "visiting" : ""}>
-            <a data-id="bookmark" href="${PATH.BOOKMARK}">${
-      CategoryTitle.bookmark
-    }</a>
-            </li>
+          <li class=${this.checkPath(PATH.BOOKMARK) ? "visiting" : ""}>
+            <a data-id="bookmark" href="${PATH.BOOKMARK}">
+              ${CategoryTitle.bookmark}
+            </a>
+          </li>
         </ul>
         `;
   }
